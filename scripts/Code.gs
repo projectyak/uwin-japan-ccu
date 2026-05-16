@@ -14,8 +14,8 @@
  *      that creates a new URL and breaks the front-end).
  *
  * Endpoint URL is hard-coded in:
- *   - index.html (APPS_SCRIPT_URL, contact form)
- *   - gate.html  (APPS_SCRIPT_URL, visitor gate form)
+ *   - index.html (APPS_SCRIPT_URL, visitor gate form — site root)
+ *   - home.html  (APPS_SCRIPT_URL, contact form — main marketing site)
  *
  * Routing: doPost reads `form_type` to pick a handler.
  *   - missing or "contact"       → handleContact   (writes to "Contact"  sheet)

@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UWin·Japan | Carbon Management Platform</title>
+  <title>UWin·Japan | Visitor Registration</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="shortcut icon" href="favicon.svg">
   <link rel="stylesheet" href="colors_and_type.css">
@@ -11,10 +11,14 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body { background: var(--ccu-bg); color: var(--ccu-fg); overflow-x: hidden; font-family: var(--ccu-font-sans); font-size: 15px; }
+    body {
+      background: var(--ccu-bg); color: var(--ccu-fg);
+      font-family: var(--ccu-font-sans); font-size: 15px;
+      min-height: 100vh; display: flex; flex-direction: column;
+    }
     a { text-decoration: none; color: inherit; }
 
-    /* ── Nav ─────────────────────────────────────────────── */
+    /* ── Nav (mirrors index.html) ─────────────────────────── */
     .nav {
       position: sticky; top: 0; z-index: 100;
       background: rgba(255,255,255,0.92);
@@ -26,36 +30,9 @@
     }
     .nav-inner { width: 100%; max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 0; }
     .nav-logo { display: flex; align-items: center; gap: 10px; }
-    .nav-logo-mark { width: 30px; height: 30px; background: var(--pwc-orange); border-radius: 2px; display: grid; place-items: center; color: #fff; font-family: var(--ccu-font-display); font-weight: 700; font-size: 18px; line-height: 1; }
-    .nav-wordmark {
-      font-family: var(--ccu-font-display);
-      font-weight: 700; font-size: 19px;
-      letter-spacing: -0.4px; color: var(--ccu-ink);
-      font-style: italic;
-    }
-    .nav-wordmark span { color: var(--pwc-orange); font-style: normal; }
-    .nav-links { display: flex; align-items: center; gap: 28px; margin-left: 20px; }
-    .nav-links a { font-size: 14px; color: var(--ccu-fg-2); font-weight: 500; transition: color var(--ccu-dur-fast); }
-    .nav-links a:hover { color: var(--pwc-orange); }
     .nav-cta { margin-left: auto; display: flex; gap: 10px; align-items: center; }
-    .nav-cta a.ghost {
-      font-size: 14px; font-weight: 600; color: var(--ccu-ink);
-      padding: 8px 16px; border-radius: 2px;
-      border: 1px solid var(--ccu-ink);
-      white-space: nowrap;
-      transition: background var(--ccu-dur-fast), color var(--ccu-dur-fast);
-    }
-    .nav-cta a.ghost:hover { background: var(--ccu-ink); color: #fff; }
-    .nav-cta a.primary {
-      font-size: 14px; font-weight: 600; color: #fff;
-      padding: 9px 20px; border-radius: 2px;
-      background: var(--pwc-orange);
-      white-space: nowrap;
-      transition: background var(--ccu-dur-fast);
-    }
-    .nav-cta a.primary:hover { background: var(--pwc-orange-dark-1); }
 
-    /* ── Language switcher ─────────────────────────────────── */
+    /* ── Language switcher ────────────────────────────────── */
     .nav-lang { display: inline-flex; align-items: center; gap: 0; margin-left: 14px; padding: 3px; background: #fff; border: 1px solid var(--ccu-line); border-radius: 999px; }
     .nav-lang button {
       font-family: var(--ccu-font-sans); font-size: 11px; font-weight: 600;
@@ -67,575 +44,77 @@
     .nav-lang button:hover { color: var(--pwc-orange); }
     .nav-lang button.active { background: var(--pwc-orange); color: #fff; }
 
-    /* ── Hero ─────────────────────────────────────────────── */
-    .hero {
-      min-height: 88vh; display: flex; align-items: center;
-      padding: 80px 40px 80px;
-      position: relative; overflow: hidden;
-      background: #fff;
+    /* ── Section shared (mirrors index.html) ──────────────── */
+    .section-eyebrow {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--pwc-orange);
+      margin-bottom: 14px; display: inline-block;
+      padding-bottom: 6px; border-bottom: 2px solid var(--pwc-orange);
     }
-    /* Soft light-orange wash — replaces the solid orange right panel.
-       Two diffuse radials over white, with a subtle dot-grid texture on top. */
-    .hero::after {
-      content: ""; position: absolute; inset: 0;
-      background:
-        radial-gradient(50% 55% at 80% 30%, rgba(208,74,2,0.16), transparent 72%),
-        radial-gradient(40% 50% at 92% 85%, rgba(255,182,0,0.12), transparent 75%),
-        radial-gradient(35% 45% at 60% 100%, rgba(254,183,145,0.18), transparent 75%),
-        #fff;
-      z-index: 0;
+    .section-h2 {
+      font-family: var(--ccu-font-display); font-weight: 400;
+      font-size: clamp(32px, 3vw, 44px); letter-spacing: -0.005em;
+      line-height: 1.1; color: var(--ccu-ink); text-wrap: balance;
     }
-    .hero::before {
-      content: ""; position: absolute; inset: 0;
-      background-image:
-        radial-gradient(rgba(208,74,2,0.10) 1px, transparent 1px);
-      background-size: 22px 22px;
-      z-index: 1; pointer-events: none;
-    }
-    .hero-inner {
-      max-width: 1200px; margin: 0 auto; width: 100%;
-      display: grid; grid-template-columns: 1.1fr 1fr;
-      gap: 64px; align-items: center; position: relative; z-index: 2;
-    }
-    .hero-eyebrow {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: transparent; color: var(--pwc-orange);
-      font-size: 11px; font-weight: 700; padding: 6px 0;
-      letter-spacing: 0.16em; text-transform: uppercase;
-      margin-bottom: 22px;
-      border-bottom: 2px solid var(--pwc-orange);
-    }
-    .hero-eyebrow svg { width: 14px; height: 14px; stroke: var(--pwc-orange); stroke-width: 2; fill: none; }
-    .hero-h1 {
-      font-family: var(--ccu-font-display);
-      font-weight: 400; font-size: clamp(44px, 4.8vw, 68px);
-      line-height: 1.05; letter-spacing: -0.01em;
-      color: var(--ccu-ink); text-wrap: balance;
-    }
-    .hero-h1 em { font-style: italic; color: var(--pwc-orange); font-weight: 400; }
-    .hero-lead {
-      margin-top: 22px;
-      font-family: var(--ccu-font-sans); font-size: 17px; line-height: 1.55; color: var(--ccu-fg-2);
-      max-width: 480px; font-weight: 400; text-wrap: pretty;
-    }
-    .hero-actions { display: flex; gap: 12px; margin-top: 36px; flex-wrap: wrap; }
-    .btn-hero-primary {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-family: var(--ccu-font-sans); font-weight: 600; font-size: 14px;
-      background: var(--pwc-orange); color: #fff;
-      padding: 12px 22px; border-radius: 2px;
-      border: none; cursor: pointer; line-height: 1;
-      transition: background var(--ccu-dur-fast) var(--ccu-ease);
-    }
-    .btn-hero-primary:hover { background: var(--pwc-orange-dark-1); }
-    .btn-hero-secondary {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-family: var(--ccu-font-sans); font-weight: 600; font-size: 14px;
-      background: transparent; color: var(--ccu-ink);
-      padding: 12px 22px; border-radius: 2px;
-      border: 1px solid var(--ccu-ink); cursor: pointer; line-height: 1;
-      transition: background var(--ccu-dur-fast), color var(--ccu-dur-fast);
-    }
-    .btn-hero-secondary:hover { background: var(--ccu-ink); color: #fff; }
-    .hero-meta { display: flex; gap: 24px; margin-top: 40px; align-items: center; flex-wrap: wrap; }
-    .hero-meta-item { font-size: 12px; color: var(--ccu-fg-3); display: flex; align-items: center; gap: 5px; font-weight: 500; }
-    .hero-meta-item svg { width: 14px; height: 14px; stroke: var(--pwc-orange); stroke-width: 2; fill: none; }
-
-    /* Hero visual panel */
-    .hero-visual { position: relative; }
-    .hero-platform-card {
-      background: #fff;
-      border: 1px solid var(--ccu-line);
-      border-radius: 4px;
-      padding: 20px;
-      box-shadow: 0 24px 48px rgba(0,0,0,0.18), 0 8px 16px rgba(0,0,0,0.08);
-    }
-    .hpc-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
-    .hpc-title { font-family: var(--ccu-font-sans); font-size: 14px; font-weight: 700; color: var(--ccu-ink); }
-    .hpc-live { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; color: var(--pwc-green); }
-    .hpc-live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--pwc-green); animation: pulse 1.6s ease-in-out infinite; }
-    @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:.35; } }
-    .hpc-kpi-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 16px; }
-    .hpc-kpi { background: var(--ccu-bg-2); border-radius: 2px; padding: 12px; border-left: 3px solid var(--pwc-orange); }
-    .hpc-kpi:nth-child(2) { border-left-color: var(--pwc-tangerine); }
-    .hpc-kpi:nth-child(3) { border-left-color: var(--pwc-yellow); }
-    .hpc-kpi-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ccu-fg-3); }
-    .hpc-kpi-val { font-family: var(--ccu-font-display); font-weight: 400; font-size: 24px; letter-spacing: -0.01em; color: var(--ccu-ink); line-height: 1.1; margin-top: 4px; font-variant-numeric: tabular-nums; }
-    .hpc-kpi-val.orange { color: var(--pwc-orange); }
-    .hpc-kpi-delta { font-size: 10px; font-weight: 700; color: var(--pwc-green); margin-top: 3px; }
-    .hpc-chart { height: 80px; position: relative; margin-bottom: 14px; border-bottom: 1px solid var(--ccu-line); }
-    .hpc-chart svg { width: 100%; height: 100%; }
-    .hpc-device-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-top: 1px solid var(--ccu-line); font-size: 12px; }
-    .hpc-device-row svg { width: 14px; height: 14px; stroke: var(--ccu-fg-3); stroke-width: 1.8; fill: none; flex-shrink: 0; }
-    .hpc-device-name { font-weight: 700; color: var(--ccu-ink); }
-    .hpc-device-id { font-family: var(--ccu-font-mono); font-size: 11px; color: var(--ccu-fg-3); }
-    .hpc-device-status { margin-left: auto; display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 700; padding: 2px 9px; border-radius: 99px; background: #E6F2E9; color: var(--pwc-green); }
-    .hpc-device-status-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--pwc-green); }
-
-    .hero-badge-float {
-      position: absolute; bottom: -16px; left: -28px;
-      background: var(--ccu-ink); color: #fff;
-      border-radius: 4px; padding: 14px 18px;
-      box-shadow: 0 24px 48px rgba(0,0,0,0.30);
-      min-width: 160px;
-      border-top: 4px solid var(--pwc-orange);
-    }
-    .hbf-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--pwc-yellow); }
-    .hbf-val { font-family: var(--ccu-font-display); font-weight: 400; font-style: italic; font-size: 28px; letter-spacing: -0.01em; line-height: 1.1; margin-top: 4px; }
-    .hbf-sub { font-size: 11px; color: rgba(255,255,255,0.55); margin-top: 2px; font-family: var(--ccu-font-mono); }
-
-    /* ── Section shared ───────────────────────────────────── */
-    .section { padding: 64px 40px; }
-    .section-inner { max-width: 1200px; margin: 0 auto; }
-    .section-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pwc-orange); margin-bottom: 14px; display: inline-block; padding-bottom: 6px; border-bottom: 2px solid var(--pwc-orange); }
-    .section-h2 { font-family: var(--ccu-font-display); font-weight: 400; font-size: clamp(32px, 3vw, 44px); letter-spacing: -0.005em; line-height: 1.1; color: var(--ccu-ink); text-wrap: balance; }
     .section-h2 em { font-style: italic; color: var(--pwc-orange); font-weight: 400; }
-    .section-lead { font-size: 17px; color: var(--ccu-fg-2); line-height: 1.55; margin-top: 14px; max-width: 540px; }
+    .section-lead { font-size: 17px; color: var(--ccu-fg-2); line-height: 1.55; margin-top: 14px; }
 
-    /* ── Partners ─────────────────────────────────────────── */
-    .partners-section { padding: 36px 40px; background: var(--ccu-bg-2); border-top: 1px solid var(--ccu-line); border-bottom: 1px solid var(--ccu-line); }
-    .partners-inner { max-width: 1200px; margin: 0 auto; }
-    .partners-label { font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ccu-fg-3); margin-bottom: 20px; text-align: center; }
-    .partners-row { display: flex; justify-content: center; align-items: center; gap: 48px; flex-wrap: wrap; }
-    .partner-name { font-family: var(--ccu-font-sans); font-weight: 700; font-size: 17px; color: var(--ccu-fg-3); letter-spacing: -0.3px; opacity: 0.7; }
-/* ── 縮減區塊間距 ── */
-#how {
-  padding-bottom: 60px; /* 從 96px 縮減為 40px */
-}
-#contact {
-  padding-top: 60px; /* 從 96px 縮減為 40px */
-}
-
-    /* ── Features ─────────────────────────────────────────── */
-    .features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 48px; }
-    .feature-card { background: #fff; border: 1px solid var(--ccu-line); border-radius: 4px; padding: 28px; transition: box-shadow var(--ccu-dur-base) var(--ccu-ease), border-color var(--ccu-dur-base); position: relative; overflow: hidden; }
-    .feature-card::before { content: ""; position: absolute; left: 0; top: 0; width: 4px; height: 32px; background: var(--pwc-orange); }
-    .feature-card:nth-child(2)::before { background: var(--pwc-tangerine); }
-    .feature-card:nth-child(3)::before { background: var(--pwc-yellow); }
-    .feature-card:nth-child(4)::before { background: var(--pwc-rose); }
-    .feature-card:hover { box-shadow: var(--ccu-shadow-lg); border-color: var(--ccu-line-2); }
-    .feature-icon { width: 26px; height: 26px; stroke: var(--pwc-orange); stroke-width: 1.6; fill: none; }
-    .feature-card:nth-child(2) .feature-icon { stroke: var(--pwc-tangerine); }
-    .feature-card:nth-child(3) .feature-icon { stroke: var(--pwc-yellow-dark-1); }
-    .feature-card:nth-child(4) .feature-icon { stroke: var(--pwc-rose); }
-    .feature-title { font-family: var(--ccu-font-display); font-weight: 400; font-size: 22px; margin-top: 16px; color: var(--ccu-ink); letter-spacing: -0.005em; }
-    .feature-body { font-size: 14px; line-height: 1.6; color: var(--ccu-fg-2); margin-top: 8px; }
-    .feature-tag { display: inline-block; margin-top: 14px; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 2px; background: #FEE7D9; color: var(--pwc-orange-dark-1); letter-spacing: 0.04em; text-transform: uppercase; }
-
-    /* ── Dark platform panel ──────────────────────────────── */
-    /* Dark panel uses the canonical Hero Pattern from preview/brand-hero.html:
-       double radial — yellow at top-right + warm orange at bottom-left — over #2D2D2D, with a fine 22px dot grid. */
-    .dark-panel {
-      padding: 96px 40px; position: relative; overflow: hidden;
+    /* ── Gate layout ──────────────────────────────────────── */
+    .gate-wrap {
+      flex: 1; display: flex; align-items: center; justify-content: center;
+      padding: 48px 20px;
       background:
-        radial-gradient(120% 80% at 80% 20%, rgba(255,182,0,0.32), transparent 60%),
-        radial-gradient(70% 60% at 10% 80%, rgba(208,74,2,0.40), transparent 70%),
-        #2D2D2D;
-    }
-    .dark-panel::after {
-      content: '';
-      position: absolute; inset: 0;
-      background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
-      background-size: 22px 22px; pointer-events: none;
-    }
-    .dark-panel-inner { max-width: 1200px; margin: 0 auto; position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; z-index: 1; }
-    .dark-panel .section-eyebrow { color: var(--pwc-yellow); border-color: var(--pwc-yellow); }
-    .dark-panel .section-h2 { color: #fff; }
-    .dark-panel .section-h2 em { color: var(--pwc-tangerine-light-1); }
-    .dark-panel .section-lead { color: rgba(255,255,255,0.7); }
-    .dark-features { display: flex; flex-direction: column; gap: 24px; margin-top: 36px; }
-    .dark-feat { display: flex; gap: 14px; align-items: flex-start; }
-    .dark-feat-icon { width: 22px; height: 22px; stroke: var(--pwc-yellow); stroke-width: 1.6; fill: none; flex-shrink: 0; margin-top: 2px; }
-    .dark-feat-title { font-size: 15px; font-weight: 700; color: #fff; }
-    .dark-feat-body { font-size: 13px; color: rgba(255,255,255,0.65); margin-top: 2px; line-height: 1.5; }
-
-    /* window chrome mockup */
-    .window-mock { background: #fff; border-radius: 4px; overflow: hidden; box-shadow: 0 32px 64px rgba(0,0,0,0.5); }
-    .window-chrome { background: var(--ccu-bg-3); padding: 10px 14px; display: flex; align-items: center; gap: 6px; border-bottom: 1px solid var(--ccu-line); }
-    .window-dot { width: 10px; height: 10px; border-radius: 50%; }
-    .window-body { padding: 18px; }
-/* ── Equipment Solution (Diagram & Features) ──────────────── */
-
- .equip-section {
-      background: #fff;
-      border-top: 1px solid var(--ccu-line);
-      padding-bottom: 48px;
-    }
-    
-    /* 示意圖容器 */
-
-  /* ── 新版圖表容器 ── */
-    .equip-master-container {
-      display: flex;
-      align-items: stretch;
-      gap: 20px;
-      margin: 60px 0;
-      font-family: var(--ccu-font-sans);
+        radial-gradient(50% 55% at 80% 30%, rgba(208,74,2,0.10), transparent 72%),
+        radial-gradient(40% 50% at 92% 85%, rgba(255,182,0,0.08), transparent 75%),
+        #fff;
     }
 
-    /* 側邊 Input/Output 欄位 */
-    .equip-side-col {
-      flex: 0 0 160px;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      justify-content: center;
-    }
-    .io-header {
-      background: var(--ccu-ink); color: #fff; font-size: 11px; font-weight: 700;
-      padding: 6px; text-align: center; border-radius: 2px; letter-spacing: 0.1em;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .io-box {
-      background: #fff; border: 1px solid var(--ccu-line); padding: 15px;
-      text-align: center; border-radius: 4px; display: flex; flex-direction: column; align-items: center; gap: 8px;
-    }
-    .io-box.highlight { border-color: var(--pwc-orange); background: #FFF9F6; }
-    .io-box i { color: var(--pwc-orange); width: 24px; height: 24px; }
-    .io-box span { font-size: 13px; font-weight: 700; color: var(--ccu-ink); }
-    .io-box small { font-size: 10px; color: var(--ccu-fg-3); }
-
-    /* 中間系統邊界區 */
-    .equip-center-boundary {
-      flex: 1;
-      border: 2px dashed var(--pwc-orange);
-      border-radius: 12px;
-      padding: 30px 20px;
-      background: #fffdfd;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-    }
-    .boundary-label {
-      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
-      background: var(--pwc-orange); color: #fff; padding: 4px 20px;
-      border-radius: 20px; font-size: 12px; font-weight: 700; white-space: nowrap;
-    }
-    .stages-row { display: flex; align-items: center; justify-content: space-around; margin: 40px 0; }
-    .stage-node { text-align: center; position: relative; flex: 1; }
-    .stage-num { 
-      width: 22px; height: 22px; background: var(--ccu-ink); color: #fff; 
-      border-radius: 50%; font-size: 11px; font-weight: 700; 
-      display: grid; place-items: center; margin: 0 auto 10px;
-    }
-    .stage-node i { color: var(--pwc-orange); margin-bottom: 10px; width: 30px; height: 30px; }
-    .stage-node span { font-size: 12px; font-weight: 700; color: var(--ccu-ink); display: block; }
-    .stage-arrow { color: var(--pwc-orange); font-weight: bold; opacity: 0.5; }
-
-    /* 資源欄位 */
-    .resource-footer { margin-top: auto; border-top: 1px solid var(--ccu-line); padding-top: 20px; text-align: center; }
-    .resource-label { 
-      background: var(--pwc-rose); color: #fff; font-size: 10px; font-weight: 700; 
-      padding: 3px 12px; border-radius: 2px; display: inline-block; margin-bottom: 15px;
-    }
-    .resource-items { display: flex; justify-content: center; gap: 30px; }
-    .res-item { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; color: var(--ccu-fg-2); }
-    .res-item i { width: 18px; height: 18px; color: var(--pwc-orange); }
-
-    @media (max-width: 992px) {
-      .equip-master-container { flex-direction: column; }
-      .equip-side-col { flex-direction: row; flex: 1; width: 100%; }
-      .io-box { flex: 1; }
-      .stages-row { flex-wrap: wrap; gap: 20px; }
-      .stage-arrow { display: none; }
-    }
-    /* 連接箭頭 */
-    .diag-arrow { color: var(--pwc-orange); font-size: 18px; font-weight: bold; }
-
-    /* 輸入/輸出 標籤 */
-    .diag-io {
-      position: absolute;
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--pwc-orange);
-      background: #ffffff;
-      padding: 4px 10px;
-      border-radius: 2px;
-      top: -15px;
-    }
-    .diag-io.input { left: 0; }
-    .diag-io.output { right: 0; }
-
-    /* 2x2 特色卡片網格 */
-/* ── Equipment Feature 卡片互動強化版 ── */
-/* ── Equipment Feature 長方形卡片樣式 ── */
-    .hw-features { 
-      display: grid; 
-      grid-template-columns: 1fr 1fr; /* 保持兩欄 */
-      gap: 20px; 
-      margin-top: 48px; 
-    }
-
-    .hw-feat { 
-      background: #fff; 
-      /* 調整 padding：上下較窄 (24px)，左右較寬 (40px)，使其視覺上變成長方形 */
-      padding: 24px 40px; 
-      border: 1px solid var(--ccu-line); 
-      border-radius: 4px;
-      transition: all 0.3s ease;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      min-height: 180px; /* 設定最小高度確保長方形感 */
-    }
-
-    /* 懸停 (Hover) 或 按下 (Active) 時的配色 */
-    .hw-feat:hover, .hw-feat:active { 
-      background: #FEE7D9 !important; /* 變回圖片中的淺橘色 */
-      border-color: var(--pwc-orange) !important;
-      transform: translateY(-2px);
-    }
-
-    /* 文字顏色：懸停時保持深色/黑色 */
-    .hw-feat:hover .hw-feat-title, .hw-feat:active .hw-feat-title { 
-      color: var(--ccu-ink) !important; 
-    }
-    .hw-feat:hover .hw-feat-body, .hw-feat:active .hw-feat-body { 
-      color: var(--ccu-fg-2) !important; 
-    }
-
-    /* 圖標顏色：懸停時保持橘色 */
-    .hw-feat:hover .hw-feat-ico, .hw-feat:active .hw-feat-ico { 
-      stroke: var(--pwc-orange) !important; 
-    }
-    .hw-features { 
-      display: grid; 
-      grid-template-columns: 1fr 1fr; 
-      gap: 24px; 
-      margin-top: 48px; 
-      margin-bottom: 60px; /* 加入這一行，增加卡片與區塊底部的距離 */
-    }
-
-    /* 標籤樣式：懸停時也保持原本配色或微調 */
-    .hw-feat:hover .hw-feat-tag {
-      background: rgba(255,255,255,0.5);
-      border-color: var(--pwc-orange);
-      color: var(--pwc-orange-dark-1) !important;
-    }
-
-    /* 基礎元素間距調整 */
-    .hw-feat-ico { width: 28px; height: 28px; stroke: var(--pwc-orange); margin-bottom: 12px; }
-    .hw-feat-title { font-family: var(--ccu-font-display); font-size: 20px; color: var(--ccu-ink); margin-bottom: 8px; }
-    .hw-feat-body { font-size: 13.5px; color: var(--ccu-fg-2); line-height: 1.5; margin-bottom: 16px; }
-    .hw-feat-tag { 
-      align-self: flex-start; /* 讓標籤靠左，不撐滿 */
-      font-size: 10px; 
-      font-weight: 700; 
-      color: var(--ccu-fg-3); 
-      border: 1px solid var(--ccu-line-2); 
-      padding: 3px 8px; 
-      border-radius: 2px; 
-      text-transform: uppercase;
-    }
-    /* 基礎樣式設定 (加入過渡效果讓變色更順暢) */
-    .hw-feat-ico { width: 28px; height: 28px; stroke: var(--pwc-orange); margin-bottom: 16px; transition: stroke 0.3s ease; }
-    .hw-feat-title { font-family: var(--ccu-font-display); font-size: 20px; color: var(--ccu-ink); margin-bottom: 12px; transition: color 0.3s ease; }
-    .hw-feat-body { font-size: 14px; color: var(--ccu-fg-2); line-height: 1.6; margin-bottom: 16px; transition: color 0.3s ease; }
-    .hw-feat-tag { 
-      font-size: 10px; 
-      font-weight: 700; 
-      color: var(--ccu-fg-3); 
-      border: 1px solid var(--ccu-line-2); 
-      padding: 4px 8px; 
-      border-radius: 2px; 
-      text-transform: uppercase;
-      transition: all 0.3s ease;
-    }
-    .hw-feat:hover .hw-feat-tag { border-color: rgba(255,255,255,0.5); }
-    @media (max-width: 768px) {
-      .diagram-flow { flex-direction: column; gap: 20px; }
-      .diag-arrow { transform: rotate(90deg); }
-      .hw-features { grid-template-columns: 1fr; }
-    }
-    /* ── Stats row ────────────────────────────────────────── */
-    .stats-section { padding: 80px 40px; background: var(--ccu-bg-2); }
-    .stats-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; }
-    .stat-item { padding: 40px 36px; border-right: 1px solid var(--ccu-line); text-align: center; }
-    .stat-item:last-child { border-right: none; }
-    .stat-val { font-family: var(--ccu-font-display); font-weight: 400; font-size: 60px; letter-spacing: -0.02em; line-height: 1; color: var(--ccu-ink); font-variant-numeric: tabular-nums; }
-    .stat-val em { font-style: italic; color: var(--pwc-orange); font-weight: 400; }
-    .stat-unit { font-size: 24px; color: var(--ccu-fg-3); margin-left: 2px; }
-    .stat-label { font-size: 14px; color: var(--ccu-fg-2); margin-top: 12px; line-height: 1.4; }
-    .stat-sub { font-size: 12px; font-family: var(--ccu-font-mono); color: var(--ccu-fg-3); margin-top: 4px; }
-
-    /* ── How it works ─────────────────────────────────────── */
-    .steps-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 48px; }
-    .step-card {
-      padding: 28px 24px;
-      border: 1px solid rgba(255,255,255,0.18);
-      border-top: 3px solid var(--pwc-orange);
-      border-radius: 4px;
-      background: rgba(255,255,255,0.13);
-    }
-    .step-card:nth-child(2) { border-top-color: var(--pwc-tangerine); }
-    .step-card:nth-child(3) { border-top-color: var(--pwc-yellow); }
-    .step-num { font-family: var(--ccu-font-display); font-style: italic; font-weight: 400; font-size: 44px; color: var(--pwc-orange); line-height: 1; letter-spacing: -0.02em; }
-    .step-card:nth-child(2) .step-num { color: var(--pwc-tangerine); }
-    .step-card:nth-child(3) .step-num { color: var(--pwc-yellow-dark-1); }
-    .step-icon { width: 24px; height: 24px; stroke: rgba(255,255,255,0.85); stroke-width: 1.6; fill: none; margin-top: 14px; }
-    .step-title { font-family: var(--ccu-font-display); font-weight: 400; font-size: 22px; margin-top: 12px; color: var(--ccu-ink); letter-spacing: -0.005em; }
-    .step-body { font-size: 14px; color: var(--ccu-fg-2); margin-top: 8px; line-height: 1.6; }
-
-    /* ── Contact ──────────────────────────────────────────── */
-    .contact-section { padding: 96px 40px; background: #fff; }
+    /* ── Contact-style form (mirrors index.html) ──────────── */
+    .contact-section { width: 100%; padding: 56px 20px; background: transparent; }
     .contact-inner { max-width: 640px; margin: 0 auto; text-align: center; }
     .contact-form { margin-top: 40px; text-align: left; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
     .form-label { font-size: 12px; font-weight: 700; color: var(--ccu-fg); display: block; letter-spacing: 0.04em; }
-    .form-input { font-family: var(--ccu-font-sans); font-size: 14px; padding: 11px 14px; border: 1px solid var(--ccu-line-2); border-radius: 2px; background: #fff; color: var(--ccu-fg); outline: none; transition: border-color var(--ccu-dur-fast), box-shadow var(--ccu-dur-fast); width: 100%; }
+    .form-input {
+      font-family: var(--ccu-font-sans); font-size: 14px;
+      padding: 11px 14px; border: 1px solid var(--ccu-line-2);
+      border-radius: 2px; background: #fff; color: var(--ccu-fg);
+      outline: none; width: 100%;
+      transition: border-color var(--ccu-dur-fast), box-shadow var(--ccu-dur-fast);
+    }
     .form-input:focus { border-color: var(--pwc-orange); box-shadow: var(--ccu-shadow-focus); }
     .form-input::placeholder { color: var(--ccu-fg-3); }
-    textarea.form-input { resize: vertical; min-height: 110px; }
-    .btn-submit { width: 100%; font-family: var(--ccu-font-sans); font-weight: 700; font-size: 14px; background: var(--pwc-orange); color: #fff; border: none; cursor: pointer; padding: 13px 20px; border-radius: 2px; margin-top: 8px; line-height: 1; transition: background var(--ccu-dur-fast); letter-spacing: 0.02em; }
+    .btn-submit {
+      width: 100%; font-family: var(--ccu-font-sans);
+      font-weight: 700; font-size: 14px;
+      background: var(--pwc-orange); color: #fff;
+      border: none; cursor: pointer;
+      padding: 13px 20px; border-radius: 2px;
+      margin-top: 8px; line-height: 1;
+      letter-spacing: 0.02em;
+      transition: background var(--ccu-dur-fast);
+    }
     .btn-submit:hover { background: var(--pwc-orange-dark-1); }
-    .form-note { font-size: 12px; color: var(--ccu-fg-3); text-align: center; margin-top: 12px; }
+    .btn-submit:disabled { opacity: 0.7; cursor: not-allowed; }
 
-    /* ── Footer ───────────────────────────────────────────── */
-    /* ── 最終版：左右對齊 + 極致壓低高度 ── */
-    .footer { 
-      background: var(--ccu-ink); 
-      border-top: 4px solid var(--pwc-orange); 
-      /* 控制最外層上下厚度：20px 上，15px 下 */
-      padding: 20px 20px 15px; 
-      color: rgba(255,255,255,0.7); 
-    }
-
-    .footer-inner { 
-      /* 控制整體寬度：1000px 讓左右對齊有呼吸感，400px 會太擠 */
-      max-width: 1000px; 
-      margin: 0 auto; 
-    }
-
-    .footer-top {
-      display: flex;
-      justify-content: center;
-      padding-bottom: 12px;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-
-    .footer-bottom { 
-      display: flex; 
-      /* 核心：將內容推向左右兩端 */
-      justify-content: space-between; 
-      align-items: center; 
-      padding-top: 12px; /* 縮減橫線下方的距離 */
-      gap: 16px; 
-    }
-
-    .footer-copy { 
-      font-size: 11px; 
-      color: rgba(255,255,255,0.5); 
-      text-align: left; /* 改回靠左 */
-    }
-
-    .footer-standards { 
-      display: flex; 
-      gap: 8px; 
-    }
-
-    .footer-std { 
-      font-family: var(--ccu-font-mono); 
-      font-size: 10px; 
-      color: rgba(255,255,255,0.4); 
-      border: 1px solid rgba(255,255,255,0.15); 
-      border-radius: 2px; 
-      padding: 2px 6px; 
-      line-height: 1;
-    }
-
-
-  /* ── 響應式優化 (Mobile & Tablet) ── */
     @media (max-width: 768px) {
-      /* 0. 防止網頁左右晃動 */
-      html, body { overflow-x: hidden; width: 100%; position: relative; }
-
-      /* 1. 導覽列：隱藏文字連結，防止撐開寬度 */
-      .nav { height: 52px; padding: 0 12px; }
-      .nav-links { display: none !important; } /* 強制隱藏頂部文字連結 */
-      .nav-inner { justify-content: space-between; }
-      .nav-wordmark { font-size: 14px; flex-shrink: 0; }
-      .nav-cta { gap: 4px; }
-      .nav-cta a.ghost, .nav-cta a.primary { padding: 5px 8px; font-size: 11px; white-space: nowrap; }
-
-      /* 2. 所有網格系統：強制轉為單欄並排 */
-      .hero-inner, 
-      .features-grid, 
-      .dark-panel-inner, 
-      .stats-inner, 
-      .steps-grid, 
-      .footer-top, 
       .form-row {
         display: flex !important;
         flex-direction: column !important;
-        grid-template-columns: 1fr !important;
-        gap: 32px !important;
-        width: 100% !important;
+        gap: 0 !important;
       }
-
-      /* 3. 特色卡片 (Features) 與 運作步驟 (How it works)：縮減寬度 */
-      .feature-card, .step-card {
-        width: 100% !important;
-        margin: 0 auto;
-        padding: 24px !important;
-      }
-
-      /* 4. 深色區塊 (Dark Panel)：解決文字與圖片重疊 */
-      .dark-panel { padding: 48px 20px; }
-      .dark-panel-inner { text-align: left; }
-      .window-mock { 
-        width: 100% !important; 
-        transform: scale(0.9); 
-        transform-origin: center top;
-        margin-top: 0;
-      }
-
-      /* 5. 首頁視覺 (Hero)：縮放卡片並置中 */
-      .hero { padding: 40px 16px; }
-      .hero-visual { 
-        order: -1; /* 圖片移到文字上方 */
-        transform: scale(0.8); 
-        margin-bottom: -40px; 
-        display: flex;
-        justify-content: center;
-      }
-      .hero-h1 { font-size: 32px !important; text-align: center; }
-      .hero-lead { text-align: center; margin-inline: auto; }
-      .hero-actions { justify-content: center; }
-
-
-  /* 手機版頁尾：強制改回置中疊放，避免左右擠壓跑版 */
-  .footer-bottom { 
-    flex-direction: column !important; /* 強制上下排 */
-    gap: 12px !important; 
-    text-align: center !important; 
-    justify-content: center !important;
-  }
-  .footer-copy { 
-    text-align: center !important; 
-  }
-}
+    }
   </style>
 </head>
 <body>
 
-
-  <!-- ── NAV ──────────────────────────────────────────────── -->
   <nav class="nav">
     <div class="nav-inner">
       <div class="nav-logo">
-        <a href="#hero" style="text-decoration:none;color:inherit;">
-          <img src="logo.png" alt="UWin Japan" style="height:36px;width:auto;display:block;">
-        </a>
-      </div>
-      <div class="nav-links">
-        <a href="#platform" data-i18n="navSolution">Solution</a>
-        <a href="#equipment" data-i18n="navHardware">Hardware</a>
-        <a href="#features" data-i18n="navSoftware">Software</a>
+        <img src="logo.png" alt="UWin Japan" style="height:36px;width:auto;display:block;">
       </div>
       <div class="nav-cta">
-        <a href="#contact" class="primary" data-i18n="navGetStarted">Contact Us</a>
         <div class="nav-lang" role="group" aria-label="Language">
           <button type="button" data-lang="en">EN</button>
           <button type="button" data-lang="ja">日</button>
@@ -645,970 +124,64 @@
     </div>
   </nav>
 
+  <main class="gate-wrap">
+    <section class="contact-section">
+      <div class="contact-inner">
+        <div class="section-eyebrow" data-i18n="gateEyebrow">Visitor registration</div>
+        <h2 class="section-h2" style="text-align:center;" data-i18n-html="gateH2">Welcome to <em>UWin·Japan</em></h2>
+        <p class="section-lead" style="margin:14px auto 0;text-align:center;" data-i18n="gateLead">Please share a few details so our team can follow up with the right resources.</p>
 
-    <!-- ── HERO ─────────────────────────────────────────────── -->
-  <section class="hero" id="hero">
-    <div class="hero-inner">
-      <div>
-        <div class="hero-eyebrow" data-i18n="heroEyebrow">CARBON &amp; ESG PRACTICE</div>
-        <h1 class="hero-h1" data-i18n-html="heroH1">
-          Capture carbon.<br><em>File compliantly.</em>
-        </h1>
-        <p class="hero-lead" style="font-size:18px;font-weight:600;color:var(--ccu-ink);margin-top:18px;" data-i18n="heroTagline">Capture CO₂. Create revenue. Stay compliant.</p>
-        <p class="hero-lead" data-i18n="heroLead">Our integrated CCU equipment and platform capture factory CO₂, convert it into sellable sodium bicarbonate, track every gram in real time, and prepare compliance and METI subsidy documents for you.</p>
-        <div class="hero-actions">
-          <a href="#contact" class="btn-hero-primary"><span data-i18n="heroCtaPrimary">Start a free trial</span> <span>→</span></a>
-          <a href="#platform" class="btn-hero-secondary">
-            <i data-lucide="play-circle" style="width:16px;height:16px;stroke:currentColor;fill:none;"></i>
-            <span data-i18n="heroCtaHardware">See the hardware</span>
-          </a>
-        </div>
-        <div class="hero-meta">
-          <div class="hero-meta-item"><i data-lucide="shield-check"></i> ISO 14064-3:2019</div>
-          <div class="hero-meta-item"><i data-lucide="shield-check"></i> ISO 14067</div>
-          <div class="hero-meta-item"><i data-lucide="shield-check"></i> METI-ready</div>
-        </div>
-      </div>
-      <div class="hero-visual">
-        <div class="hero-platform-card">
-          <div class="hpc-header">
-            <div class="hpc-title">dMRV Dashboard · SKID-A</div>
-            <div class="hpc-live"><div class="hpc-live-dot"></div>Live · 5s</div>
-          </div>
-          <div class="hpc-kpi-row">
-            <div class="hpc-kpi">
-              <div class="hpc-kpi-label">Captured</div>
-              <div class="hpc-kpi-val">14.2<span style="font-size:14px;color:var(--ccu-fg-2);">t</span></div>
-              <div class="hpc-kpi-delta">▲ 18.7%</div>
+        <form class="contact-form" id="gate-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" data-i18n="fName">Name</label>
+              <input class="form-input" type="text" name="name" placeholder="Tanaka Keiji" data-i18n-placeholder="fNamePh" required>
             </div>
-            <div class="hpc-kpi">
-              <div class="hpc-kpi-label">Rate</div>
-              <div class="hpc-kpi-val orange">94.7<span style="font-size:14px;color:var(--pwc-orange);">%</span></div>
-              <div class="hpc-kpi-delta" style="color:var(--ccu-fg-3);">target 90%</div>
-            </div>
-            <div class="hpc-kpi">
-              <div class="hpc-kpi-label">Energy</div>
-              <div class="hpc-kpi-val">2.41<span style="font-size:14px;color:var(--ccu-fg-2);">GJ/t</span></div>
-              <div class="hpc-kpi-delta">▼ 4.1%</div>
+            <div class="form-group">
+              <label class="form-label" data-i18n="fEmail">Email</label>
+              <input class="form-input" type="email" name="email" placeholder="tanaka@steel-co.jp" required>
             </div>
           </div>
-          <div class="hpc-chart">
-            <svg viewBox="0 0 400 80" preserveAspectRatio="none">
-              <defs>
-                <linearGradient id="area-grad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#D04A02" stop-opacity="0.18"/>
-                  <stop offset="100%" stop-color="#D04A02" stop-opacity="0"/>
-                </linearGradient>
-              </defs>
-              <path d="M0,60 C40,55 80,30 120,28 C160,26 200,50 240,40 C280,30 320,15 400,12 L400,80 L0,80 Z" fill="url(#area-grad)"/>
-              <path d="M0,60 C40,55 80,30 120,28 C160,26 200,50 240,40 C280,30 320,15 400,12" fill="none" stroke="#D04A02" stroke-width="2" stroke-linecap="round"/>
-              <circle cx="400" cy="12" r="4" fill="#D04A02"/>
-            </svg>
-          </div>
-          <div class="hpc-device-row">
-            <i data-lucide="settings"></i>
-            <div>
-              <div class="hpc-device-name">SKID-A · New UWin CCU</div>
-              <div class="hpc-device-id">SN-2026-NA-0048 · Plant 02</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" data-i18n="fCompany">Company</label>
+              <input class="form-input" type="text" name="company" placeholder="Santon Steel Corp." data-i18n-placeholder="fCompanyPh" required>
             </div>
-            <div class="hpc-device-status"><div class="hpc-device-status-dot"></div>Operating</div>
-          </div>
-        </div>
-        <div class="hero-badge-float">
-          <div class="hbf-label">Subsidy est.</div>
-          <div class="hbf-val">¥38.2M</div>
-          <div class="hbf-sub">METI FY26</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-
-<section class="dark-panel" id="platform">
-    <div class="dark-panel-inner">
-      <div>
-        <div class="section-eyebrow" data-i18n="darkEyebrow">Solution Package</div>
-        <h2 class="section-h2" data-i18n-html="darkH2">Hardware &amp; software,<br><em>built as one package.</em></h2>
-        <p class="section-lead" data-i18n="darkLead">Replace manual spreadsheets and one-off data exports with a single platform that connects sensors, calculations, and filings.</p>
-        <div class="dark-features">
-          <div class="dark-feat">
-            <i data-lucide="gauge" class="dark-feat-icon"></i>
-            <div>
-              <div class="dark-feat-title" data-i18n="dark1Title">Equipment health at a glance</div>
-              <div class="dark-feat-body" data-i18n="dark1Body">Uptime, vibration, temperature, and capture-rate trends for every SKID in your plant, updated in real time.</div>
+            <div class="form-group">
+              <label class="form-label" data-i18n="fTitle">Title</label>
+              <input class="form-input" type="text" name="title" placeholder="Sustainability Manager" data-i18n-placeholder="fTitlePh" required>
             </div>
           </div>
-          <div class="dark-feat">
-            <i data-lucide="line-chart" class="dark-feat-icon"></i>
-            <div>
-              <div class="dark-feat-title" data-i18n="dark2Title">Historical trend analysis</div>
-              <div class="dark-feat-body" data-i18n="dark2Body">Compare current vs prior period vs targets across any date range, with exportable CSV for internal reporting.</div>
-            </div>
-          </div>
-          <div class="dark-feat">
-            <i data-lucide="database" class="dark-feat-icon"></i>
-            <div>
-              <div class="dark-feat-title" data-i18n="dark3Title">Master data management</div>
-              <div class="dark-feat-body" data-i18n="dark3Body">Maintain legal entity info, plant boundary declarations, and emission factor versions in one governed store.</div>
-            </div>
-          </div>
-        </div>
+          <button type="submit" class="btn-submit" data-i18n-html="gateSubmit">Enter site &rarr;</button>
+        </form>
       </div>
-      <div class="window-mock">
-        <div class="window-chrome">
-          <div class="window-dot" style="background:#FF5F57;"></div>
-          <div class="window-dot" style="background:#FFBD2E;"></div>
-          <div class="window-dot" style="background:#28C840;"></div>
-          <div style="margin-left:12px;font-size:11px;font-family:var(--ccu-font-mono);color:var(--ccu-fg-3);">UWin·Japan Platform</div>
-        </div>
-        <div class="window-body">
-          <div style="display:flex;gap:14px;">
-            <div style="width:120px;display:flex;flex-direction:column;gap:2px;">
-              <div style="font-size:9px;font-weight:700;letter-spacing:.12em;color:var(--ccu-fg-3);padding:4px 8px 2px;text-transform:uppercase;">DEVICE</div>
-              <div style="font-size:12px;font-weight:700;padding:6px 8px;background:#FEE7D9;color:var(--pwc-orange-dark-1);border-radius:2px;">Dashboard</div>
-              <div style="font-size:12px;color:var(--ccu-fg-2);padding:6px 8px;">Performance</div>
-              <div style="font-size:12px;color:var(--ccu-fg-2);padding:6px 8px;">Equipment</div>
-              <div style="font-size:9px;font-weight:700;letter-spacing:.12em;color:var(--ccu-fg-3);padding:10px 8px 2px;text-transform:uppercase;">PIPELINE</div>
-              <div style="font-size:12px;color:var(--ccu-fg-2);padding:6px 8px;">Calculation</div>
-              <div style="font-size:12px;color:var(--ccu-fg-2);padding:6px 8px;">Reporting</div>
-            </div>
-            <div style="flex:1;">
-              <div style="font-family:var(--ccu-font-display);font-size:14px;font-weight:400;color:var(--ccu-ink);margin-bottom:10px;">dMRV Dashboard</div>
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
-                <div style="background:var(--ccu-bg-2);border-radius:2px;padding:10px;border-left:3px solid var(--pwc-orange);">
-                  <div style="font-size:9px;font-weight:700;color:var(--ccu-fg-3);letter-spacing:.1em;text-transform:uppercase;">Captured</div>
-                  <div style="font-family:var(--ccu-font-display);font-size:20px;font-weight:400;color:var(--ccu-ink);margin-top:4px;letter-spacing:-0.01em;">14.2t</div>
-                  <div style="font-size:10px;color:var(--pwc-green);font-weight:700;margin-top:2px;">▲ 18.7%</div>
-                </div>
-                <div style="background:#FEE7D9;border-radius:2px;padding:10px;border-left:3px solid var(--pwc-orange);">
-                  <div style="font-size:9px;font-weight:700;color:var(--pwc-orange-dark-1);letter-spacing:.1em;text-transform:uppercase;">Rate</div>
-                  <div style="font-family:var(--ccu-font-display);font-size:20px;font-weight:400;color:var(--pwc-orange);margin-top:4px;letter-spacing:-0.01em;">94.7%</div>
-                  <div style="font-size:10px;color:var(--pwc-orange-dark-1);font-weight:700;margin-top:2px;">target 90%</div>
-                </div>
-              </div>
-              <div style="background:var(--ccu-bg-2);border-radius:2px;padding:10px;">
-                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-                  <div style="font-size:10px;font-weight:700;color:var(--ccu-fg-3);">Capture trend</div>
-                  <div style="font-size:10px;color:var(--ccu-fg-3);font-family:var(--ccu-font-mono);">7d</div>
-                </div>
-                <svg viewBox="0 0 200 48" style="width:100%;height:48px;">
-                  <path d="M0,38 C20,34 40,20 60,18 C80,16 100,28 120,24 C140,20 160,8 200,6 L200,48 L0,48 Z" fill="rgba(208,74,2,0.12)"/>
-                  <path d="M0,38 C20,34 40,20 60,18 C80,16 100,28 120,24 C140,20 160,8 200,6" fill="none" stroke="#D04A02" stroke-width="1.5"/>
-                  <circle cx="200" cy="6" r="3" fill="#D04A02"/>
-                </svg>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-  <div style="max-width:1200px;margin:56px auto 0;padding-top:48px;border-top:1px solid rgba(255,255,255,0.12);position:relative;z-index:1;">
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
-        <span style="width:3px;height:18px;background:var(--pwc-yellow);border-radius:2px;flex-shrink:0;"></span>
-        <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.16em;color:var(--pwc-yellow);" data-i18n="howEyebrow">How It Works</span>
-      </div>
-      <h2 class="section-h2" style="color:#fff;" data-i18n-html="howH2">From sensor reading <em>to filed report.</em></h2>
-      <div class="steps-grid">
-        <div class="step-card">
-          <div class="step-num" style="color:var(--pwc-tangerine-light-1);">01</div>
-          <i data-lucide="radio-tower" class="step-icon"></i>
-          <div class="step-title" style="color:#fff;" data-i18n="step1Title">Connect your equipment</div>
-          <div class="step-body" style="color:rgba(255,255,255,0.65);" data-i18n="step1Body">Register your CCU skids and configure IoT sensor feeds. Supported protocols: Modbus TCP, OPC-UA, MQTT, and manual CSV upload.</div>
-        </div>
-        <div class="step-card">
-          <div class="step-num" style="color:var(--pwc-tangerine-light-1);">02</div>
-          <i data-lucide="calculator" class="step-icon"></i>
-          <div class="step-title" style="color:#fff;" data-i18n="step2Title">Define your calculation</div>
-          <div class="step-body" style="color:rgba(255,255,255,0.65);" data-i18n="step2Body">Select approved emission factors, declare your system boundary, and configure the calculation template for your facility type.</div>
-        </div>
-        <div class="step-card">
-          <div class="step-num" style="color:var(--pwc-tangerine-light-1);">03</div>
-          <i data-lucide="file-check-2" class="step-icon"></i>
-          <div class="step-title" style="color:#fff;" data-i18n="step3Title">Export your compliance package</div>
-          <div class="step-body" style="color:rgba(255,255,255,0.65);" data-i18n="step3Body">One click assembles a METI-ready ZIP: pre-filled subsidy form, sensor evidence, audit trail, and calculation summary with hash-stamped and signed.</div>
-        </div>
-      </div>
-  </div>
-
-  </section>
-
-
-
-<section class="section equip-section" id="equipment">
-    <div class="section-inner">
-      <div class="section-eyebrow" style="text-transform:none;" data-i18n="navEquipment">Equipment</div>
-      <h2 class="section-h2" data-i18n-html="equipH2">UWin CCU CO<sub>2</sub> System Flow Diagram</h2>
-      <p class="section-lead" data-i18n="equipLead">An integrated skid-mounted system capturing CO₂ from industrial exhaust and converting it into marketable byproducts.</p>
-
-      <!-- ── LIVE MONITORING DIAGRAM ──────────────────────────── -->
-      <style>
-        #mon-wrap {
-          --dmrv-orange:      #D04A02;
-          --dmrv-line:        rgba(0,0,0,0.12);
-          --dmrv-glass-bg:    #FFFFFF;
-          --dmrv-glass-border:rgba(208,74,2,0.20);
-          --dmrv-fg:          #1A1A1A;
-          --dmrv-fg-mid:      rgba(30,30,30,0.65);
-          --dmrv-fg-low:      rgba(30,30,30,0.45);
-          --dmrv-ok:          #2C8646;
-          --dmrv-warn:        #D04A02;
-          --dmrv-err:         #E0301E;
-          --dmrv-shadow-1:    0 2px 12px rgba(0,0,0,0.08), 0 0 0 1px rgba(208,74,2,0.14);
-          --dmrv-font-ui:     "Inter","Helvetica Neue","Segoe UI",sans-serif;
-          --dmrv-font-mono:   "JetBrains Mono","SF Mono",Menlo,Consolas,monospace;
-          font-family: var(--dmrv-font-ui);
-        }
-        #mon-wrap .dmrv-glass {
-          background: var(--dmrv-glass-bg);
-          border: 1px solid var(--dmrv-glass-border);
-          border-radius: 10px;
-          box-shadow: var(--dmrv-shadow-1);
-          position: relative;
-          overflow: hidden;
-        }
-        #mon-wrap .dmrv-hero { height: 560px; position: relative; overflow: hidden; }
-        #mon-wrap .dmrv-hero-canvas {
-          position: absolute; inset: 0;
-          background:
-            #FFFFFF;
-        }
-        #mon-wrap .dmrv-hero-canvas svg { width: 100%; height: 100%; display: block; }
-        #mon-wrap .dmrv-hero-overlay {
-          position: absolute; top: 14px; left: 16px; right: 16px;
-          display: flex; align-items: flex-start; justify-content: space-between;
-          gap: 12px; pointer-events: none; z-index: 5;
-        }
-        #mon-wrap .dmrv-hero-title { display: flex; flex-direction: column; gap: 4px; }
-        #mon-wrap .dmrv-hero-title .h {
-          font-size: 11px; font-weight: 600; text-transform: uppercase;
-          letter-spacing: 0.16em; color: var(--dmrv-fg-low);
-        }
-        #mon-wrap .dmrv-hero-title .h.hero-status {
-          display: inline-flex; align-items: center; gap: 8px;
-          color: var(--dmrv-warn); font-size: 12px;
-          text-transform: none; letter-spacing: 0.04em; font-weight: 700;
-        }
-        #mon-wrap .dmrv-status-pulse {
-          width: 10px; height: 10px; border-radius: 50%;
-          background: var(--dmrv-ok);
-          box-shadow: 0 0 0 3px rgba(44,134,70,0.18), 0 0 10px var(--dmrv-ok);
-          animation: mon-pulse 1.6s ease-in-out infinite;
-        }
-        #mon-wrap .dmrv-status-pulse.warn {
-          background: var(--dmrv-warn);
-          box-shadow: 0 0 0 3px rgba(208,74,2,0.18), 0 0 10px var(--dmrv-warn);
-        }
-        @keyframes mon-pulse { 0%,100%{ opacity:1; transform:scale(1); } 50%{ opacity:.4; transform:scale(.7); } }
-        #mon-wrap .dmrv-hero-legend {
-          position: absolute; bottom: 12px; left: 16px; z-index: 5;
-          display: flex; gap: 14px; align-items: center;
-          padding: 7px 12px;
-          background: rgba(255,255,255,0.88);
-          border: 1px solid rgba(0,0,0,0.10); border-radius: 999px;
-          backdrop-filter: blur(8px);
-        }
-        #mon-wrap .dmrv-hero-legend .item {
-          display: inline-flex; align-items: center; gap: 6px;
-          font-size: 10.5px; color: var(--dmrv-fg-mid); letter-spacing: 0.04em;
-        }
-        #mon-wrap .dmrv-hero-legend .swatch { width: 18px; height: 3px; border-radius: 2px; }
-        #mon-wrap .dmrv-hero-axes {
-          position: absolute; bottom: 14px; right: 16px; z-index: 5;
-          font-family: var(--dmrv-font-mono); font-size: 10px;
-          color: var(--dmrv-fg-low);
-          background: rgba(255,255,255,0.88);
-          border: 1px solid rgba(0,0,0,0.10); border-radius: 6px;
-          padding: 6px 10px; backdrop-filter: blur(8px); letter-spacing: 0.06em;
-        }
-        /* SVG strokes — dark on light canvas */
-        #mon-wrap .dmrv-eq-stroke { stroke: rgba(45,45,45,0.60); stroke-width: 1.2; fill: none; }
-        #mon-wrap .dmrv-eq-stroke-soft { stroke: rgba(45,45,45,0.22); stroke-width: 1; fill: none; }
-        #mon-wrap .dmrv-eq-grid line { stroke: rgba(0,0,0,0.06); stroke-width: 1; }
-        #mon-wrap .dmrv-eq-flow {
-          stroke: #D04A02; stroke-width: 1.8; fill: none;
-          stroke-dasharray: 3 4;
-          filter: drop-shadow(0 0 3px rgba(208,74,2,0.45));
-          animation: mon-flowdash 1.6s linear infinite;
-        }
-        #mon-wrap .dmrv-eq-flow.cool { stroke: #0089EB; filter: drop-shadow(0 0 3px rgba(0,137,235,0.40)); }
-        @keyframes mon-flowdash { to { stroke-dashoffset: -28; } }
-        #mon-wrap .dmrv-hotspot { cursor: pointer; pointer-events: all; transition: transform .15s; transform-origin: center; transform-box: fill-box; }
-        #mon-wrap .dmrv-hotspot circle.outer { fill: rgba(208,74,2,0.10); stroke: #D04A02; stroke-width: 1.4; }
-        #mon-wrap .dmrv-hotspot circle.inner { fill: #D04A02; filter: drop-shadow(0 0 5px rgba(208,74,2,0.65)); }
-        #mon-wrap .dmrv-hotspot circle.ring  { fill: none; stroke: #D04A02; stroke-width: 1.2; opacity: .40; transform-origin: center; transform-box: fill-box; animation: mon-ringpulse 2.4s ease-out infinite; }
-        @keyframes mon-ringpulse { 0%{ transform:scale(.6); opacity:.7; } 100%{ transform:scale(2.2); opacity:0; } }
-        #mon-wrap .dmrv-hotspot.active circle.outer, #mon-wrap .dmrv-hotspot:hover circle.outer { fill: rgba(208,74,2,0.16); stroke: #D04A02; }
-        #mon-wrap .dmrv-hotspot.active circle.inner, #mon-wrap .dmrv-hotspot:hover circle.inner { fill: #D04A02; filter: drop-shadow(0 0 8px rgba(208,74,2,0.70)); }
-        #mon-wrap .dmrv-hotspot.alarm circle.outer { stroke: #E0301E; fill: rgba(224,48,30,0.12); }
-        #mon-wrap .dmrv-hotspot.alarm circle.inner { fill: #E0301E; filter: drop-shadow(0 0 8px rgba(224,48,30,0.70)); }
-        #mon-wrap .dmrv-hotspot.alarm circle.ring  { stroke: #E0301E; }
-        #mon-wrap .dmrv-leader-svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 3; }
-        #mon-wrap .dmrv-leader-line { fill: none; stroke: rgba(208,74,2,0.50); stroke-width: 1.2; }
-        #mon-wrap .dmrv-leader-line.active { stroke: rgba(208,74,2,0.70); }
-        #mon-wrap .dmrv-leader-line.alarm  { stroke: rgba(224,48,30,0.70); }
-        /* Floating data tags — white cards on light canvas */
-        #mon-wrap .dmrv-dtag {
-          position: absolute; z-index: 4; pointer-events: auto;
-          min-width: 136px; padding: 8px 11px;
-          background: rgba(255,255,255,0.95);
-          border: 1px solid rgba(0,0,0,0.11); border-radius: 8px;
-          backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-          box-shadow: 0 3px 12px rgba(0,0,0,0.09), inset 0 1px 0 #fff;
-          transition: border-color .18s, transform .18s, box-shadow .18s;
-        }
-        #mon-wrap .dmrv-dtag.active {
-          border-color: rgba(208,74,2,0.50);
-          box-shadow: 0 4px 16px rgba(0,0,0,0.10), 0 0 0 1px rgba(208,74,2,0.25);
-          transform: translateY(-2px);
-        }
-        #mon-wrap .dmrv-dtag.alarm {
-          border-color: rgba(224,48,30,0.50);
-          box-shadow: 0 4px 16px rgba(0,0,0,0.10), 0 0 0 1px rgba(224,48,30,0.25);
-        }
-        #mon-wrap .dmrv-dtag .dt-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 4px; }
-        #mon-wrap .dmrv-dtag .dt-id   { font-family: var(--dmrv-font-mono); font-size: 9.5px; color: var(--dmrv-fg-low); letter-spacing: .06em; }
-        #mon-wrap .dmrv-dtag .dt-status { width: 7px; height: 7px; border-radius: 50%; background: var(--dmrv-ok); box-shadow: 0 0 5px var(--dmrv-ok); }
-        #mon-wrap .dmrv-dtag.active .dt-status { background: var(--dmrv-warn); box-shadow: 0 0 5px var(--dmrv-warn); }
-        #mon-wrap .dmrv-dtag.alarm  .dt-status { background: var(--dmrv-err);  box-shadow: 0 0 5px var(--dmrv-err); }
-        #mon-wrap .dmrv-dtag .dt-label { font-size: 10.5px; color: var(--dmrv-fg-mid); margin-bottom: 3px; letter-spacing: .02em; }
-        #mon-wrap .dmrv-dtag .dt-value { font-family: var(--dmrv-font-mono); font-size: 18px; font-weight: 600; color: #1A1A1A; line-height: 1; letter-spacing: -.01em; display: flex; align-items: baseline; gap: 4px; }
-        #mon-wrap .dmrv-dtag .dt-value .u { font-family: var(--dmrv-font-ui); font-weight: 500; font-size: 11px; color: var(--dmrv-fg-low); }
-        #mon-wrap .dmrv-dtag .dt-bar { margin-top: 6px; height: 3px; background: rgba(0,0,0,0.08); border-radius: 2px; overflow: hidden; position: relative; }
-        #mon-wrap .dmrv-dtag .dt-bar > i { position: absolute; left: 0; top: 0; bottom: 0; background: #D04A02; border-radius: 2px; box-shadow: 0 0 6px rgba(208,74,2,0.40); }
-        #mon-wrap .dmrv-dtag.alarm  .dt-bar > i { background: #E0301E; box-shadow: 0 0 6px rgba(224,48,30,0.50); }
-        #mon-wrap .dmrv-dtag .dt-range { display: flex; justify-content: space-between; font-family: var(--dmrv-font-mono); font-size: 9px; color: var(--dmrv-fg-low); margin-top: 3px; letter-spacing: .04em; }
-
-        /* ── Mobile: stack SVG + sensor cards ── */
-        @media (max-width: 640px) {
-          /* Turn hero into a vertical grid */
-          #mon-wrap .dmrv-hero {
-            height: auto !important;
-            overflow: visible;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 6px;
-            padding: 6px;
-            background: #fff;
-            border-radius: 10px;
-          }
-          /* Status badge: row 1, full width */
-          #mon-wrap .dmrv-hero-overlay {
-            position: static !important;
-            grid-column: 1 / -1;
-            order: 1;
-            pointer-events: auto;
-            padding: 4px 6px 0;
-          }
-          /* SVG canvas: row 2, full width, fixed height */
-          #mon-wrap .dmrv-hero-canvas {
-            position: relative !important;
-            inset: auto !important;
-            height: 200px;
-            grid-column: 1 / -1;
-            order: 2;
-            border-radius: 8px;
-            overflow: hidden;
-          }
-          /* Hide leader lines and axes — not useful at small size */
-          #mon-wrap .dmrv-leader-svg,
-          #mon-wrap .dmrv-hero-axes { display: none !important; }
-          /* Sensor cards: 2-column grid, rows 3+ */
-          #mon-wrap .dmrv-dtag {
-            position: static !important;
-            left: auto !important; right: auto !important;
-            top: auto !important; bottom: auto !important;
-            min-width: 0 !important;
-            order: 3;
-            font-size: 11px;
-          }
-          #mon-wrap .dmrv-dtag .dt-value { font-size: 15px; }
-          /* Legend: last row, full width */
-          #mon-wrap .dmrv-hero-legend {
-            position: static !important;
-            bottom: auto; left: auto;
-            grid-column: 1 / -1;
-            order: 9;
-            border-radius: 8px;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
-          }
-        }
-      </style>
-
-      <div style="border-radius:16px; padding:4px 0 0; margin-top:32px; margin-bottom:40px;">
-        <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
-          <span style="width:3px;height:18px;background:#D04A02;border-radius:2px;flex-shrink:0;"></span>
-          <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.16em;color:#D04A02;" data-i18n="monEyebrow">Equipment Real-Time Monitoring</span>
-          <span style="font-size:11px;color:rgba(45,45,45,0.50);margin-left:auto;letter-spacing:0.03em;" data-i18n="monMeta">IoT sensors · ISO 14064-3:2019</span>
-        </div>
-        <div id="mon-wrap">
-          <div class="dmrv-glass dmrv-hero" id="dmrv-hero">
-            <div class="dmrv-hero-canvas">
-              <svg viewBox="0 0 880 480" preserveAspectRatio="xMidYMid meet">
-                <defs>
-                  <linearGradient id="mon-ground" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="rgba(208,74,2,0.16)"/>
-                    <stop offset="100%" stop-color="rgba(208,74,2,0)"/>
-                  </linearGradient>
-                  <linearGradient id="mon-metalSide" x1="0" y1="0" x2="1" y2="0">
-                    <stop offset="0%" stop-color="rgba(0,0,0,0.07)"/>
-                    <stop offset="50%" stop-color="rgba(0,0,0,0.00)"/>
-                    <stop offset="100%" stop-color="rgba(0,0,0,0.07)"/>
-                  </linearGradient>
-                  <linearGradient id="mon-hotJacket" x1="0" y1="0" x2="1" y2="0">
-                    <stop offset="0%" stop-color="rgba(208,74,2,0.22)"/>
-                    <stop offset="50%" stop-color="rgba(208,74,2,0.06)"/>
-                    <stop offset="100%" stop-color="rgba(208,74,2,0.22)"/>
-                  </linearGradient>
-                  <pattern id="mon-hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-                    <line x1="0" y1="0" x2="0" y2="6" stroke="rgba(0,0,0,0.10)" stroke-width="1"/>
-                  </pattern>
-                  <radialGradient id="mon-haze" cx="50%" cy="60%" r="60%">
-                    <stop offset="0%" stop-color="rgba(208,74,2,0.04)"/>
-                    <stop offset="100%" stop-color="rgba(208,74,2,0)"/>
-                  </radialGradient>
-                </defs>
-                <rect x="0" y="0" width="880" height="480" fill="url(#mon-haze)"/>
-                <g class="dmrv-eq-grid">
-                  <line x1="0"   y1="380" x2="0"   y2="450"/><line x1="40"  y1="380" x2="40"  y2="450"/>
-                  <line x1="80"  y1="380" x2="80"  y2="450"/><line x1="120" y1="380" x2="120" y2="450"/>
-                  <line x1="160" y1="380" x2="160" y2="450"/><line x1="200" y1="380" x2="200" y2="450"/>
-                  <line x1="240" y1="380" x2="240" y2="450"/><line x1="280" y1="380" x2="280" y2="450"/>
-                  <line x1="320" y1="380" x2="320" y2="450"/><line x1="360" y1="380" x2="360" y2="450"/>
-                  <line x1="400" y1="380" x2="400" y2="450"/><line x1="440" y1="380" x2="440" y2="450"/>
-                  <line x1="480" y1="380" x2="480" y2="450"/><line x1="520" y1="380" x2="520" y2="450"/>
-                  <line x1="560" y1="380" x2="560" y2="450"/><line x1="600" y1="380" x2="600" y2="450"/>
-                  <line x1="640" y1="380" x2="640" y2="450"/><line x1="680" y1="380" x2="680" y2="450"/>
-                  <line x1="720" y1="380" x2="720" y2="450"/><line x1="760" y1="380" x2="760" y2="450"/>
-                  <line x1="800" y1="380" x2="800" y2="450"/><line x1="840" y1="380" x2="840" y2="450"/>
-                  <line x1="0" y1="385" x2="880" y2="385"/><line x1="0" y1="407" x2="880" y2="407"/>
-                  <line x1="0" y1="429" x2="880" y2="429"/><line x1="0" y1="451" x2="880" y2="451"/>
-                </g>
-                <path d="M0,380 L880,380 L880,450 L0,450 Z" fill="url(#mon-ground)" opacity="0.6"/>
-                <line x1="0" y1="380" x2="880" y2="380" stroke="rgba(208,74,2,0.65)" stroke-width="1" stroke-dasharray="2 4"/>
-                <!-- COOLING UNIT -->
-                <g>
-                  <rect x="30" y="240" width="120" height="140" class="dmrv-eq-stroke" fill="url(#mon-metalSide)"/>
-                  <rect x="30" y="240" width="120" height="20"  class="dmrv-eq-stroke"/>
-                  <rect x="30" y="340" width="120" height="40"  class="dmrv-eq-stroke" fill="url(#mon-hatch)"/>
-                  <circle cx="70"  cy="280" r="22" class="dmrv-eq-stroke"/>
-                  <circle cx="70"  cy="280" r="4"  class="dmrv-eq-stroke" fill="rgba(0,0,0,0.08)"/>
-                  <path d="M70,260 Q78,272 70,280 M70,300 Q62,288 70,280 M50,280 Q62,272 70,280 M90,280 Q78,288 70,280" class="dmrv-eq-stroke-soft"/>
-                  <circle cx="118" cy="280" r="22" class="dmrv-eq-stroke"/>
-                  <circle cx="118" cy="280" r="4"  class="dmrv-eq-stroke" fill="rgba(0,0,0,0.08)"/>
-                  <path d="M118,260 Q126,272 118,280 M118,300 Q110,288 118,280 M98,280 Q110,272 118,280 M138,280 Q126,288 118,280" class="dmrv-eq-stroke-soft"/>
-                  <line x1="42"  y1="380" x2="42"  y2="395" class="dmrv-eq-stroke"/>
-                  <line x1="138" y1="380" x2="138" y2="395" class="dmrv-eq-stroke"/>
-                  <text x="90" y="412" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(30,30,30,0.50)" letter-spacing="2" data-i18n="svgCooler">COOLER · C-100</text>
-                </g>
-                <!-- ABSORPTION TOWER -->
-                <g>
-                  <ellipse cx="280" cy="150" rx="38" ry="14" class="dmrv-eq-stroke" fill="url(#mon-metalSide)"/>
-                  <path d="M242,150 L242,360 M318,150 L318,360" class="dmrv-eq-stroke"/>
-                  <ellipse cx="280" cy="360" rx="38" ry="12" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.02)"/>
-                  <ellipse cx="280" cy="200" rx="38" ry="10" class="dmrv-eq-stroke-soft"/>
-                  <ellipse cx="280" cy="240" rx="38" ry="10" class="dmrv-eq-stroke-soft"/>
-                  <ellipse cx="280" cy="280" rx="38" ry="10" class="dmrv-eq-stroke-soft"/>
-                  <ellipse cx="280" cy="320" rx="38" ry="10" class="dmrv-eq-stroke-soft"/>
-                  <path d="M270,122 L290,122 L284,150 L276,150 Z" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.04)"/>
-                  <line x1="280" y1="100" x2="280" y2="122" class="dmrv-eq-stroke"/>
-                  <circle cx="280" cy="100" r="3" class="dmrv-eq-stroke" fill="rgba(0,137,235,0.50)"/>
-                  <line x1="248" y1="372" x2="244" y2="395" class="dmrv-eq-stroke"/>
-                  <line x1="312" y1="372" x2="316" y2="395" class="dmrv-eq-stroke"/>
-                  <text x="280" y="412" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(30,30,30,0.50)" letter-spacing="2" data-i18n="svgAbsorber">ABSORBER · T-200</text>
-                </g>
-                <!-- TOP PIPE -->
-                <path d="M280,100 L280,80 L600,80 L600,150" class="dmrv-eq-stroke"/>
-                <path d="M280,100 L280,80 L600,80 L600,150" class="dmrv-eq-flow"/>
-                <circle cx="440" cy="80" r="6" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.06)"/>
-                <line x1="440" y1="76" x2="442" y2="80" class="dmrv-eq-stroke"/>
-                <!-- REACTOR -->
-                <g>
-                  <ellipse cx="600" cy="150" rx="42" ry="12" class="dmrv-eq-stroke" fill="url(#mon-metalSide)"/>
-                  <path d="M558,150 L558,310 L642,310 L642,150 Z" class="dmrv-eq-stroke" fill="url(#mon-hotJacket)"/>
-                  <path d="M566,180 Q600,170 634,180 Q600,200 566,210 Q600,200 634,220 Q600,240 566,250 Q600,240 634,260 Q600,280 566,290 Q600,280 634,300" class="dmrv-eq-stroke-soft"/>
-                  <line x1="558" y1="180" x2="642" y2="180" stroke="rgba(208,74,2,0.5)" stroke-width="0.8" stroke-dasharray="3 2"/>
-                  <line x1="558" y1="220" x2="642" y2="220" stroke="rgba(208,74,2,0.5)" stroke-width="0.8" stroke-dasharray="3 2"/>
-                  <line x1="558" y1="260" x2="642" y2="260" stroke="rgba(208,74,2,0.5)" stroke-width="0.8" stroke-dasharray="3 2"/>
-                  <line x1="558" y1="300" x2="642" y2="300" stroke="rgba(208,74,2,0.5)" stroke-width="0.8" stroke-dasharray="3 2"/>
-                  <ellipse cx="600" cy="310" rx="42" ry="12" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.05)"/>
-                  <rect x="650" y="200" width="22" height="60" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.03)"/>
-                  <line x1="654" y1="208" x2="668" y2="208" class="dmrv-eq-stroke-soft"/>
-                  <line x1="654" y1="216" x2="668" y2="216" class="dmrv-eq-stroke-soft"/>
-                  <line x1="654" y1="224" x2="668" y2="224" class="dmrv-eq-stroke-soft"/>
-                  <circle cx="661" cy="245" r="3" fill="rgba(208,74,2,0.8)"/>
-                  <line x1="600" y1="322" x2="595" y2="395" class="dmrv-eq-stroke"/>
-                  <line x1="600" y1="322" x2="605" y2="395" class="dmrv-eq-stroke"/>
-                  <text x="600" y="412" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(30,30,30,0.50)" letter-spacing="2" data-i18n="svgReactor">REACTOR · R-300</text>
-                </g>
-                <!-- FEED TANK -->
-                <g>
-                  <ellipse cx="430" cy="270" rx="32" ry="10" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.04)"/>
-                  <path d="M398,270 L398,360 L462,360 L462,270" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.02)"/>
-                  <ellipse cx="430" cy="360" rx="32" ry="10" class="dmrv-eq-stroke"/>
-                  <rect x="408" y="290" width="44" height="6" class="dmrv-eq-stroke" fill="rgba(0,137,235,0.12)"/>
-                  <rect x="408" y="290" width="30" height="6" fill="rgba(0,137,235,0.45)"/>
-                  <path d="M462,310 L520,310 L520,260 L558,260" class="dmrv-eq-stroke"/>
-                  <path d="M462,310 L520,310 L520,260 L558,260" class="dmrv-eq-flow cool"/>
-                  <line x1="402" y1="370" x2="400" y2="395" class="dmrv-eq-stroke"/>
-                  <line x1="458" y1="370" x2="460" y2="395" class="dmrv-eq-stroke"/>
-                  <text x="430" y="412" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(30,30,30,0.50)" letter-spacing="2" data-i18n="svgFeedTank">FEED TANK · V-250</text>
-                </g>
-                <!-- PUMP / VALVE -->
-                <g>
-                  <circle cx="200" cy="340" r="14" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.03)"/>
-                  <path d="M200,326 L200,354 M186,340 L214,340" class="dmrv-eq-stroke-soft"/>
-                  <line x1="150" y1="340" x2="186" y2="340" class="dmrv-eq-stroke"/>
-                  <line x1="214" y1="340" x2="240" y2="340" class="dmrv-eq-stroke"/>
-                  <path d="M150,340 L186,340 M214,340 L240,340" class="dmrv-eq-flow cool"/>
-                </g>
-                <!-- REACTOR -> CRYSTALLIZER PIPE -->
-                <path d="M642,200 L720,200 L720,260" class="dmrv-eq-stroke"/>
-                <path d="M642,200 L720,200 L720,260" class="dmrv-eq-flow"/>
-                <!-- CRYSTALLIZER + BINS -->
-                <g>
-                  <path d="M696,260 L744,260 L744,310 L720,340 L696,310 Z" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.03)"/>
-                  <line x1="708" y1="270" x2="732" y2="270" class="dmrv-eq-stroke-soft"/>
-                  <line x1="708" y1="282" x2="732" y2="282" class="dmrv-eq-stroke-soft"/>
-                  <line x1="708" y1="294" x2="732" y2="294" class="dmrv-eq-stroke-soft"/>
-                  <rect x="760" y="320" width="20" height="40" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.02)"/>
-                  <line x1="760" y1="328" x2="780" y2="328" class="dmrv-eq-stroke-soft"/>
-                  <rect x="782" y="320" width="20" height="40" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.02)"/>
-                  <line x1="782" y1="328" x2="802" y2="328" class="dmrv-eq-stroke-soft"/>
-                  <rect x="804" y="320" width="20" height="40" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.02)"/>
-                  <line x1="804" y1="328" x2="824" y2="328" class="dmrv-eq-stroke-soft"/>
-                  <rect x="826" y="320" width="20" height="40" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.02)"/>
-                  <line x1="826" y1="328" x2="846" y2="328" class="dmrv-eq-stroke-soft"/>
-                  <rect x="848" y="320" width="20" height="40" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.02)"/>
-                  <line x1="848" y1="328" x2="868" y2="328" class="dmrv-eq-stroke-soft"/>
-                  <text x="820" y="412" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(30,30,30,0.50)" letter-spacing="2" data-i18n="svgCrystallizer">CRYSTALLIZER · X-400</text>
-                </g>
-                <line x1="720" y1="340" x2="720" y2="395" class="dmrv-eq-stroke-soft"/>
-                <text x="280" y="92" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="rgba(30,30,30,0.55)" letter-spacing="2" data-i18n="svgCo2In">CO₂ IN</text>
-                <text x="800" y="290" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="rgba(30,30,30,0.55)" letter-spacing="2" data-i18n="svgProduct">PRODUCT</text>
-                <!-- HOTSPOTS — IoT A-01 ~ A-06 -->
-                <g class="dmrv-hotspot" data-hot="A-01">
-                  <circle cx="260" cy="130" r="14" class="ring"/>
-                  <circle cx="260" cy="130" r="9"  class="outer"/>
-                  <circle cx="260" cy="130" r="3.5" class="inner"/>
-                </g>
-                <g class="dmrv-hotspot" data-hot="A-02">
-                  <circle cx="300" cy="130" r="14" class="ring"/>
-                  <circle cx="300" cy="130" r="9"  class="outer"/>
-                  <circle cx="300" cy="130" r="3.5" class="inner"/>
-                </g>
-                <g class="dmrv-hotspot" data-hot="A-03">
-                  <circle cx="200" cy="340" r="14" class="ring"/>
-                  <circle cx="200" cy="340" r="9"  class="outer"/>
-                  <circle cx="200" cy="340" r="3.5" class="inner"/>
-                </g>
-                <g class="dmrv-hotspot alarm" data-hot="A-04">
-                  <circle cx="660" cy="220" r="14" class="ring"/>
-                  <circle cx="660" cy="220" r="9"  class="outer"/>
-                  <circle cx="660" cy="220" r="3.5" class="inner"/>
-                </g>
-                <g class="dmrv-hotspot" data-hot="A-05">
-                  <circle cx="740" cy="290" r="14" class="ring"/>
-                  <circle cx="740" cy="290" r="9"  class="outer"/>
-                  <circle cx="740" cy="290" r="3.5" class="inner"/>
-                </g>
-                <g class="dmrv-hotspot" data-hot="A-06">
-                  <circle cx="430" cy="320" r="14" class="ring"/>
-                  <circle cx="430" cy="320" r="9"  class="outer"/>
-                  <circle cx="430" cy="320" r="3.5" class="inner"/>
-                </g>
-              </svg>
-            </div>
-
-            <!-- Leader lines overlay -->
-            <svg class="dmrv-leader-svg" id="dmrv-leader-svg" preserveAspectRatio="none"></svg>
-
-            <!-- Floating Data Tags — IoT A-01 ~ A-06 -->
-            <div class="dmrv-dtag" data-tag="A-01" data-leader-x="260" data-leader-y="130" data-anchor="left" style="left:3%;top:8%;">
-              <div class="dt-head"><span class="dt-id">A-01 · T-200</span><span class="dt-status"></span></div>
-              <div class="dt-label" data-i18n="a01Label">Inlet CO₂ Concentration NDIR</div>
-              <div class="dt-value">8,240<span class="u">ppm</span></div>
-              <div class="dt-bar"><i style="width:72%"></i></div>
-              <div class="dt-range"><span>6,000</span><span>12,000</span></div>
-            </div>
-            <div class="dmrv-dtag" data-tag="A-02" data-leader-x="300" data-leader-y="130" data-anchor="left" style="left:3%;top:32%;">
-              <div class="dt-head"><span class="dt-id">A-02 · T-200</span><span class="dt-status"></span></div>
-              <div class="dt-label" data-i18n="a02Label">Outlet CO₂ Concentration NDIR</div>
-              <div class="dt-value">412<span class="u">ppm</span></div>
-              <div class="dt-bar"><i style="width:53%"></i></div>
-              <div class="dt-range"><span>200</span><span>600</span></div>
-            </div>
-            <div class="dmrv-dtag" data-tag="A-03" data-leader-x="200" data-leader-y="340" data-anchor="left" style="left:3%;top:62%;">
-              <div class="dt-head"><span class="dt-id">A-03 · INLET</span><span class="dt-status"></span></div>
-              <div class="dt-label" data-i18n="a03Label">Exhaust Gas Flow Meter</div>
-              <div class="dt-value">1,420<span class="u">Nm³/h</span></div>
-              <div class="dt-bar"><i style="width:62%"></i></div>
-              <div class="dt-range"><span>800</span><span>1,800</span></div>
-            </div>
-            <div class="dmrv-dtag alarm" data-tag="A-04" data-leader-x="660" data-leader-y="220" data-anchor="right" style="right:5%;top:8%;">
-              <div class="dt-head"><span class="dt-id">A-04 · R-300</span><span class="dt-status"></span></div>
-              <div class="dt-label" data-i18n="a04Label">CCU Power Consumption JIS C1211</div>
-              <div class="dt-value">342.5<span class="u">kWh</span></div>
-              <div class="dt-bar"><i style="width:71%"></i></div>
-              <div class="dt-range"><span>200</span><span>400</span></div>
-            </div>
-            <div class="dmrv-dtag" data-tag="A-05" data-leader-x="740" data-leader-y="290" data-anchor="right" style="right:5%;top:32%;">
-              <div class="dt-head"><span class="dt-id">A-05 · X-400</span><span class="dt-status"></span></div>
-              <div class="dt-label" data-i18n="a05Label">NaHCO₃ Output JIS B7611</div>
-              <div class="dt-value">2.84<span class="u">t/batch</span></div>
-              <div class="dt-bar"><i style="width:56%"></i></div>
-              <div class="dt-range"><span>2.0</span><span>3.5</span></div>
-            </div>
-            <div class="dmrv-dtag" data-tag="A-06" data-leader-x="430" data-leader-y="320" data-anchor="right" style="right:5%;top:62%;">
-              <div class="dt-head"><span class="dt-id">A-06 · V-250</span><span class="dt-status"></span></div>
-              <div class="dt-label" data-i18n="a06Label">NaOH Usage</div>
-              <div class="dt-value">18.2<span class="u">L/h</span></div>
-              <div class="dt-bar"><i style="width:41%"></i></div>
-              <div class="dt-range"><span>10</span><span>30</span></div>
-            </div>
-
-            <!-- Status overlay -->
-            <div class="dmrv-hero-overlay">
-              <div class="dmrv-hero-title">
-                <span class="h hero-status">
-                  <span class="dmrv-status-pulse warn"></span>
-                  <span data-i18n="monStatus">Operating · Caution</span>
-                </span>
-              </div>
-            </div>
-
-            <!-- Legend -->
-            <div class="dmrv-hero-legend">
-              <div class="item"><span class="swatch" style="background:#D04A02"></span><span data-i18n="legendCo2">CO₂ Flow</span></div>
-              <div class="item"><span class="swatch" style="background:#0089EB"></span><span data-i18n="legendCooling">Cooling Circuit</span></div>
-              <div class="item"><span class="swatch" style="background:rgba(45,45,45,0.45)"></span><span data-i18n="legendStructure">Structure</span></div>
-            </div>
-
-            <!-- Axes -->
-            <div class="dmrv-hero-axes" data-i18n="monAxes">+X 12.4m · +Z 4.8m · 4 active sensors</div>
-          </div><!-- /dmrv-hero -->
-        </div><!-- /mon-wrap -->
-      </div>
-
-      <script>
-      (function(){
-        var SVG_W = 880, SVG_H = 480;
-        function $mon(sel, root){ return Array.prototype.slice.call((root||document).querySelectorAll(sel)); }
-        function leaderPath(tag, hero){
-          var w = hero.clientWidth, h = hero.clientHeight;
-          if(!w) return "";
-          var lx = parseFloat(tag.dataset.leaderX);
-          var ly = parseFloat(tag.dataset.leaderY);
-          var tx = lx * (w / SVG_W);
-          var ty = ly * (h / SVG_H);
-          var rect = tag.getBoundingClientRect();
-          var heroRect = hero.getBoundingClientRect();
-          var anchorSide = tag.dataset.anchor;
-          var ax, ay;
-          ay = rect.top - heroRect.top + rect.height / 2;
-          if(anchorSide === "left") ax = rect.left - heroRect.left + rect.width;
-          else                       ax = rect.left - heroRect.left;
-          var midX = (ax + tx) / 2;
-          return "M"+ax+","+ay+" L"+midX+","+ay+" L"+midX+","+ty+" L"+tx+","+ty;
-        }
-        function rebuildLeaders(){
-          var hero = document.getElementById("dmrv-hero");
-          var svg  = document.getElementById("dmrv-leader-svg");
-          if(!hero || !svg) return;
-          var w = hero.clientWidth, h = hero.clientHeight;
-          svg.setAttribute("viewBox","0 0 "+w+" "+h);
-          svg.setAttribute("width",w); svg.setAttribute("height",h);
-          svg.innerHTML = "";
-          $mon(".dmrv-dtag", hero).forEach(function(tag){
-            var p = document.createElementNS("http://www.w3.org/2000/svg","path");
-            var cls = "dmrv-leader-line";
-            if(tag.classList.contains("active")) cls += " active";
-            if(tag.classList.contains("alarm"))  cls += " alarm";
-            p.setAttribute("class", cls);
-            p.setAttribute("d", leaderPath(tag, hero));
-            svg.appendChild(p);
-          });
-        }
-        function setActive(id){
-          var hero = document.getElementById("dmrv-hero");
-          if(!hero) return;
-          $mon(".dmrv-hotspot", hero).forEach(function(g){
-            if(g.dataset.hot === id) g.classList.add("active");
-            else g.classList.remove("active");
-          });
-          $mon(".dmrv-dtag", hero).forEach(function(t){
-            if(t.dataset.tag === id) t.classList.add("active");
-            else t.classList.remove("active");
-          });
-          rebuildLeaders();
-        }
-        function init(){
-          var hero = document.getElementById("dmrv-hero");
-          if(!hero) return;
-          $mon(".dmrv-hotspot", hero).forEach(function(g){
-            g.addEventListener("click", function(){ setActive(g.dataset.hot); });
-          });
-          $mon(".dmrv-dtag", hero).forEach(function(t){
-            t.addEventListener("click", function(){ setActive(t.dataset.tag); });
-          });
-          rebuildLeaders();
-          window.addEventListener("resize", rebuildLeaders);
-        }
-        if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
-        else init();
-      })();
-      </script>
-
-      <div style="margin-top:48px; margin-bottom:8px;">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
-          <span style="width:3px;height:18px;background:#D04A02;border-radius:2px;flex-shrink:0;"></span>
-          <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.16em;color:#D04A02;" data-i18n="equipHowEyebrow">How It Works</span>
-        </div>
-        <h3 style="font-family:var(--ccu-font-display);font-weight:400;font-size:clamp(22px,2.2vw,30px);color:var(--ccu-ink);letter-spacing:-0.005em;" data-i18n-html="equipHowH3">From factory exhaust <em style="font-style:italic;color:var(--pwc-orange);">to sellable product.</em></h3>
-      </div>
-
-      <div class="equip-master-container">
-        
-        <div class="equip-side-col">
-          <div class="io-header" data-i18n="equipInputs">INPUTS</div>
-          <div class="io-box">
-            <i data-lucide="factory"></i>
-            <span data-i18n="equipSrcTitle">Factory Exhaust</span>
-          </div>
-          <div class="io-box">
-            <i data-lucide="beaker"></i>
-            <span data-i18n="util3">NaOH</span>
-          </div>
-        </div>
-
-        <div class="equip-center-boundary">
-          <div class="boundary-label" data-i18n="equipBoundaryLabel">UWin CCU System Boundary</div>
-          <div class="stages-row">
-            <div class="stage-node">
-              <div class="stage-num">1</div>
-              <i data-lucide="wind"></i>
-              <span data-i18n="stage1Name">Capture</span>
-            </div>
-            <div class="stage-arrow">→</div>
-            <div class="stage-node">
-              <div class="stage-num">2</div>
-              <i data-lucide="container"></i>
-              <span data-i18n="stage2Name">Absorption</span>
-            </div>
-            <div class="stage-arrow">→</div>
-            <div class="stage-node">
-              <div class="stage-num">3</div>
-              <i data-lucide="thermometer-sun"></i>
-              <span data-i18n="stage3Name">Heat Mgmt</span>
-            </div>
-            <div class="stage-arrow">→</div>
-            <div class="stage-node">
-              <div class="stage-num">4</div>
-              <i data-lucide="layers"></i>
-              <span data-i18n="stage4Name">Crystallization</span>
-            </div>
-            <div class="stage-arrow">→</div>
-            <div class="stage-node">
-              <div class="stage-num">5</div>
-              <i data-lucide="filter"></i>
-              <span data-i18n="stage5Name">Separation</span>
-            </div>
-          </div>
-          
-          <div class="resource-footer">
-            <div class="resource-label" data-i18n="equipResources">Resource Inputs</div>
-            <div class="resource-items">
-              <div class="res-item"><i data-lucide="zap"></i> <span data-i18n="util1">Electricity</span></div>
-              <div class="res-item"><i data-lucide="droplets"></i> <span data-i18n="util2">Water</span></div>
-              <div class="res-item"><i data-lucide="test-tube-2"></i> <span data-i18n="util3">NaOH</span></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="equip-side-col">
-          <div class="io-header" data-i18n="equipOutputs">OUTPUTS</div>
-          <div class="io-box highlight">
-            <i data-lucide="package"></i>
-            <span data-i18n="output1Title">Byproduct</span>
-            <small>NaHCO₃ / Na₂CO₃</small>
-          </div>
-          <div class="io-box">
-            <i data-lucide="cloud-sun"></i>
-            <span data-i18n="output2Title">Purified Gas</span>
-          </div>
-        </div>
-      </div>
-
-      <div style="margin-top:56px; margin-bottom:8px;">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
-          <span style="width:3px;height:18px;background:#D04A02;border-radius:2px;flex-shrink:0;"></span>
-          <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.16em;color:#D04A02;" data-i18n="hwFeaturesEyebrow">Hardware Features</span>
-        </div>
-        <h3 style="font-family:var(--ccu-font-display);font-weight:400;font-size:clamp(22px,2.2vw,30px);color:var(--ccu-ink);letter-spacing:-0.005em;" data-i18n-html="hwFeaturesH3">Modular, IoT-ready, <em style="font-style:italic;color:var(--pwc-orange);">built to capture.</em></h3>
-      </div>
-
- <div class="hw-features">
-        <div class="hw-feat">
-          <i data-lucide="package-2" class="hw-feat-ico"></i>
-          <div class="hw-feat-title" data-i18n="hwFeat1Title">Modular skid-mounted</div>
-          <div class="hw-feat-body" data-i18n="hwFeat1Body">Compact footprint, plug-and-play deployment in 6–8 weeks with minimal civil work.</div>
-          <span class="hw-feat-tag" data-i18n="hwFeat1Tag">COMPACT · PLUG & PLAY</span>
-        </div>
-        <div class="hw-feat">
-          <i data-lucide="trending-up" class="hw-feat-ico"></i>
-          <div class="hw-feat-title" data-i18n="hwFeat2Title">>90% capture rate</div>
-          <div class="hw-feat-body" data-i18n="hwFeat2Body">Industry-leading CO₂ absorption efficiency directly from flue gas streams.</div>
-          <span class="hw-feat-tag" data-i18n="hwFeat2Tag">INDUSTRY-LEADING</span>
-        </div>
-        <div class="hw-feat">
-          <i data-lucide="leaf" class="hw-feat-ico"></i>
-          <div class="hw-feat-title" data-i18n="hwFeat3Title">Marketable byproducts</div>
-          <div class="hw-feat-body" data-i18n="hwFeat3Body">High-purity NaHCO₃ / Na₂CO₃ ready for food, pharma, and construction supply chains.</div>
-          <span class="hw-feat-tag" data-i18n="hwFeat3Tag">NaHCO₃ · Na₂CO₃</span>
-        </div>
-        <div class="hw-feat">
-          <i data-lucide="radio-tower" class="hw-feat-ico"></i>
-          <div class="hw-feat-title" data-i18n="hwFeat4Title">IoT-ready MRV</div>
-          <div class="hw-feat-body" data-i18n="hwFeat4Body">Built-in sensors stream live capture and emissions data to the UWin platform from day one.</div>
-          <span class="hw-feat-tag" data-i18n="hwFeat4Tag">METI-COMPLIANT</span>
-        </div>
-      </div>
-    </div><!-- /section-inner -->
-  </section><!-- /equip-section -->
-
-  <div style="max-width:1200px;margin:0 auto;padding:0 40px;">
-    <hr style="border:none;border-top:1px solid var(--ccu-line);margin:0;">
-  </div>
-
-    <!-- ── FEATURES -->
-  <section class="section" id="features">
-    <div class="section-inner">
-      <div class="section-eyebrow" data-i18n="featuresEyebrow">Platform capabilities</div>
-      <h2 class="section-h2" data-i18n-html="featuresH2">Everything your CCU operation needs,<br><em>in one auditable place.</em></h2>
-      <p class="section-lead" data-i18n="featuresLead">From sensor to submission, CCU·XPO handles the full chain, with no manual re-entry.</p>
-      <div class="features-grid">
-        <div class="feature-card">
-          <i data-lucide="radio-tower" class="feature-icon"></i>
-          <div class="feature-title" data-i18n="feat1Title">Real-time digital MRV</div>
-          <div class="feature-body" data-i18n="feat1Body">IoT sensor data streams directly into a tamper-evident audit trail every 5 seconds. Calibration events and drift corrections are automatically versioned and locked.</div>
-          <div class="feature-tag">ISO 14064-3:2019</div>
-        </div>
-        <div class="feature-card">
-          <i data-lucide="calculator" class="feature-icon"></i>
-          <div class="feature-title" data-i18n="feat2Title">Automated emissions calculation</div>
-          <div class="feature-body" data-i18n="feat2Body">Calculation pipelines apply approved emission factors from IPCC, METI, and JIS standards. Every computation is explainable and traceable to source.</div>
-          <div class="feature-tag">ISO 14067</div>
-        </div>
-        <div class="feature-card">
-          <i data-lucide="file-check-2" class="feature-icon"></i>
-          <div class="feature-title" data-i18n="feat3Title">METI subsidy packages</div>
-          <div class="feature-body" data-i18n="feat3Body">One click generates a compliant ZIP containing your CCU form, supporting evidence, and audit trail hash, ready for submission to NEDO or the Ministry of Economy.</div>
-          <div class="feature-tag">METI FY2026</div>
-        </div>
-        <div class="feature-card">
-          <i data-lucide="shield-check" class="feature-icon"></i>
-          <div class="feature-title" data-i18n="feat4Title">Assured audit trail</div>
-          <div class="feature-body" data-i18n="feat4Body">Every data point, calculation, and user action carries a timestamp, user fingerprint, and hash chain. Carbon &amp; ESG team provides assurance on demand.</div>
-          <div class="feature-tag" data-i18n="feat4Tag">Audit · read-only share</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-
-  <!-- ── CONTACT ───────────────────────────────────────────── -->
-  <section class="contact-section" id="contact">
-  <div class="contact-inner">
-    <div class="section-eyebrow" style="display:inline-block;" data-i18n="contactEyebrow">Get in touch</div>
-    <h2 class="section-h2" style="text-align:center;" data-i18n-html="contactH2">Ready to simplify <em>your CCU compliance?</em></h2>
-    <p class="section-lead" style="margin:14px auto 0;text-align:center;" data-i18n="contactLead">Request a personalized demo tailored to your CCU operations, reporting workflow, and compliance requirements.</p>
-    
-    <form class="contact-form" id="contact-form">
-      <div class="form-row">
-        <div class="form-group">
-          <label class="form-label" data-i18n="fName">Name</label>
-          <input class="form-input" type="text" name="name" placeholder="Tanaka Keiji" data-i18n-placeholder="fNamePh" required>
-        </div>
-        <div class="form-group">
-          <label class="form-label" data-i18n="fEmail">Email</label>
-          <input class="form-input" type="email" name="email" placeholder="tanaka@steel-co.jp" required>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="form-label" data-i18n="fCompany">Company</label>
-        <input class="form-input" type="text" name="company" placeholder="Santon Steel Corp." data-i18n-placeholder="fCompanyPh">
-      </div>
-      <div class="form-group">
-        <label class="form-label" data-i18n="fMessage">Message</label>
-        <textarea class="form-input" name="message" placeholder="Tell us about your CCU operation and compliance goals." data-i18n-placeholder="fMessagePh"></textarea>
-      </div>
-      <button type="submit" class="btn-submit" data-i18n-html="fSubmit">Send message →</button>
-      <div class="form-note"></div>
-    </form>
-  </div>
-</section>
-
-  <!-- ── FOOTER ────────────────────────────────────────────── -->
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-top">
-      <div class="footer-logo-wrap">
-        <img src="logo.png" alt="UWin Japan" style="height:36px;width:auto;display:block;filter:brightness(0) invert(1);">
-      </div>
-    </div>
-    
-    <div class="footer-bottom">
-      <div class="footer-copy" data-i18n="footerCopy">© 2026 UWin Japan  All rights reserved.</div>
-      <div class="footer-standards">
-        <span class="footer-std">ISO 14064-3</span>
-        <span class="footer-std">ISO 14067</span>
-        <span class="footer-std">METI FY26</span>
-      </div>
-    </div>
-  </div>
-</footer>
+    </section>
+  </main>
 
   <script src="i18n.js"></script>
   <script>lucide.createIcons();</script>
-<script>
-  // 請確認這個網址是您最新的「網頁應用程式 URL」
-  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxuLFurjzcXsh1SxnB0fJoy3kfXu8MVzHfYb723sUMm0V6t_r3F167Le5OYiGOsNNF7cg/exec';
+  <script>
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxuLFurjzcXsh1SxnB0fJoy3kfXu8MVzHfYb723sUMm0V6t_r3F167Le5OYiGOsNNF7cg/exec';
 
-  document.getElementById('contact-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const form = this;
-    const btn = form.querySelector('.btn-submit');
-    
-    // 更改按鈕狀態
-    btn.textContent = 'Sending…'; 
-    btn.disabled = true;
+    document.getElementById('gate-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const form = this;
+      const btn = form.querySelector('.btn-submit');
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
 
-    // 使用 FormData 抓取表單資料
-    const formData = new FormData(form);
+      const fd = new FormData(form);
+      fd.append('form_type', 'visitor_gate');
 
-    // 執行 POST 傳送
-    fetch(APPS_SCRIPT_URL, { 
-      method: 'POST', 
-      body: formData,
-      mode: 'no-cors' // 避免 CORS 報錯，這在 GAS 串接中很常見
-    })
-    .then(() => {
-      // 成功後顯示感謝訊息
-      form.innerHTML = '<div style="text-align:center;padding:32px;color:var(--pwc-orange);font-weight:700;">Thanks! We\'ve received your message and will review it soon.</div>';
-    })
-    .catch((error) => { 
-      console.error('Error:', error);
-      btn.textContent = 'Send message →'; 
-      btn.disabled = false;
-      alert('傳送失敗，請稍後再試。');
+      fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        body: fd,
+        mode: 'no-cors'
+      }).finally(() => {
+        window.location.href = 'home.html';
+      });
     });
-  });
-</script>
+  </script>
 
 </body>
 </html>
