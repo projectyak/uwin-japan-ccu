@@ -150,6 +150,13 @@ equipBoundaryLabel: "UWin CCU System Boundary",
       svgCrystallizer: "CRYSTALLIZER · X-400",
       svgCo2In: "CO₂ IN",
       svgProduct: "PRODUCT",
+
+      gateEyebrow: "Visitor registration",
+      gateH2: "Welcome to <em>UWin·Japan</em>",
+      gateLead: "Please share a few details so our team can follow up with the right resources.",
+      fTitle: "Title",
+      fTitlePh: "Sustainability Manager",
+      gateSubmit: "Enter site &rarr;",
     },
 
     zh: {
@@ -302,6 +309,13 @@ equipBoundaryLabel: "UWin CCU 系統計算邊界",
       svgCrystallizer: "結晶機 · X-400",
       svgCo2In: "CO₂ 入口",
       svgProduct: "產物",
+
+      gateEyebrow: "訪客登記",
+      gateH2: "歡迎來到 <em>UWin·Japan</em>",
+      gateLead: "進入網站前，請留下您的聯絡資訊，方便我們後續為您提供合適的資料。",
+      fTitle: "職稱",
+      fTitlePh: "永續發展經理",
+      gateSubmit: "進入網站 &rarr;",
     },
 
     ja: {
@@ -454,6 +468,13 @@ equipBoundaryLabel: "UWin CCU 系統計算邊界",
       svgCrystallizer: "晶析機 · X-400",
       svgCo2In: "CO₂ 入口",
       svgProduct: "製品",
+
+      gateEyebrow: "ご来訪登録",
+      gateH2: "<em>UWin·Japan</em> へようこそ",
+      gateLead: "サイトに入る前に、ご担当者様の情報をお聞かせください。",
+      fTitle: "役職",
+      fTitlePh: "サステナビリティ責任者",
+      gateSubmit: "サイトに入る &rarr;",
     }
   };
 
