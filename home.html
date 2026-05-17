@@ -946,23 +946,26 @@
         #mon-wrap .dmrv-hotspot.alarm circle.inner { fill: #E0301E; filter: drop-shadow(0 0 8px rgba(224,48,30,0.70)); }
         #mon-wrap .dmrv-hotspot.alarm circle.ring  { stroke: #E0301E; }
         #mon-wrap .dmrv-leader-svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 3; }
-        #mon-wrap .dmrv-leader-line { fill: none; stroke: rgba(208,74,2,0.50); stroke-width: 1.2; }
-        #mon-wrap .dmrv-leader-line.active { stroke: rgba(208,74,2,0.70); }
-        #mon-wrap .dmrv-leader-line.alarm  { stroke: rgba(224,48,30,0.70); }
-        /* Floating data tags — white cards on light canvas */
+        /* Leader lines: hidden by default, fade in only for the active sensor */
+        #mon-wrap .dmrv-leader-line { fill: none; stroke: rgba(208,74,2,0.70); stroke-width: 1.2; opacity: 0; transition: opacity .15s ease; }
+        #mon-wrap .dmrv-leader-line.active { opacity: 1; }
+        #mon-wrap .dmrv-leader-line.alarm  { stroke: rgba(224,48,30,0.75); }
+        /* Floating data tags — white cards; hidden by default, slide-in on hover/active */
         #mon-wrap .dmrv-dtag {
-          position: absolute; z-index: 4; pointer-events: auto;
+          position: absolute; z-index: 4; pointer-events: none;
+          opacity: 0; transform: translateY(6px);
           min-width: 136px; padding: 8px 11px;
           background: rgba(255,255,255,0.95);
           border: 1px solid rgba(0,0,0,0.11); border-radius: 8px;
           backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
           box-shadow: 0 3px 12px rgba(0,0,0,0.09), inset 0 1px 0 #fff;
-          transition: border-color .18s, transform .18s, box-shadow .18s;
+          transition: opacity .15s ease, transform .15s ease, border-color .18s, box-shadow .18s;
         }
         #mon-wrap .dmrv-dtag.active {
+          opacity: 1; pointer-events: auto;
+          transform: translateY(-2px);
           border-color: rgba(208,74,2,0.50);
           box-shadow: 0 4px 16px rgba(0,0,0,0.10), 0 0 0 1px rgba(208,74,2,0.25);
-          transform: translateY(-2px);
         }
         #mon-wrap .dmrv-dtag.alarm {
           border-color: rgba(224,48,30,0.50);
@@ -1090,136 +1093,197 @@
                 </g>
                 <path d="M0,380 L880,380 L880,450 L0,450 Z" fill="url(#mon-ground)" opacity="0.6"/>
                 <line x1="0" y1="380" x2="880" y2="380" stroke="rgba(208,74,2,0.65)" stroke-width="1" stroke-dasharray="2 4"/>
-                <!-- COOLING UNIT -->
+                <!-- ──────────────────────────────────────────────────
+                     CCU PROCESS DIAGRAM (PPT-faithful, simplified)
+                     Gas line  : QT-110 quench → HG-200 super-gravity reactor → ST-300 spray polish → BL-101 fan → SK-001 stack
+                     Utilities : TK-420 NaOH tank (feeds reactor)  ·  PF-700 filter press (recovers NaHCO₃ solid)
+                     ────────────────────────────────────────────────── -->
+
+                <!-- Process inlet/outlet labels -->
+                <text x="6" y="172" text-anchor="start" font-family="JetBrains Mono, monospace" font-size="10" fill="rgba(30,30,30,0.55)" letter-spacing="2" data-i18n="svgCo2In">CO₂ IN</text>
+                <text x="635" y="30" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(30,30,30,0.50)" letter-spacing="2" data-i18n="svgCleanGas">↑ CLEAN GAS</text>
+                <text x="830" y="325" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="rgba(30,30,30,0.55)" letter-spacing="2" data-i18n="svgProduct">NaHCO₃</text>
+
+                <!-- ─── QT-110 Quench Tower ─── -->
                 <g>
-                  <rect x="30" y="240" width="120" height="140" class="dmrv-eq-stroke" fill="url(#mon-metalSide)"/>
-                  <rect x="30" y="240" width="120" height="20"  class="dmrv-eq-stroke"/>
-                  <rect x="30" y="340" width="120" height="40"  class="dmrv-eq-stroke" fill="url(#mon-hatch)"/>
-                  <circle cx="70"  cy="280" r="22" class="dmrv-eq-stroke"/>
-                  <circle cx="70"  cy="280" r="4"  class="dmrv-eq-stroke" fill="rgba(0,0,0,0.08)"/>
-                  <path d="M70,260 Q78,272 70,280 M70,300 Q62,288 70,280 M50,280 Q62,272 70,280 M90,280 Q78,288 70,280" class="dmrv-eq-stroke-soft"/>
-                  <circle cx="118" cy="280" r="22" class="dmrv-eq-stroke"/>
-                  <circle cx="118" cy="280" r="4"  class="dmrv-eq-stroke" fill="rgba(0,0,0,0.08)"/>
-                  <path d="M118,260 Q126,272 118,280 M118,300 Q110,288 118,280 M98,280 Q110,272 118,280 M138,280 Q126,288 118,280" class="dmrv-eq-stroke-soft"/>
-                  <line x1="42"  y1="380" x2="42"  y2="395" class="dmrv-eq-stroke"/>
-                  <line x1="138" y1="380" x2="138" y2="395" class="dmrv-eq-stroke"/>
-                  <text x="90" y="412" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(30,30,30,0.50)" letter-spacing="2" data-i18n="svgCooler">COOLER · C-100</text>
+                  <ellipse cx="110" cy="140" rx="30" ry="8" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.05)"/>
+                  <rect x="80" y="140" width="60" height="180" class="dmrv-eq-stroke" fill="url(#mon-metalSide)"/>
+                  <ellipse cx="110" cy="320" rx="30" ry="8" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.03)"/>
+                  <line x1="92" y1="155" x2="92" y2="170" stroke="rgba(0,137,235,0.55)" stroke-width="1" stroke-dasharray="2 2"/>
+                  <line x1="110" y1="155" x2="110" y2="170" stroke="rgba(0,137,235,0.55)" stroke-width="1" stroke-dasharray="2 2"/>
+                  <line x1="128" y1="155" x2="128" y2="170" stroke="rgba(0,137,235,0.55)" stroke-width="1" stroke-dasharray="2 2"/>
+                  <line x1="80" y1="270" x2="140" y2="270" stroke="rgba(0,137,235,0.30)" stroke-width="1"/>
+                  <line x1="110" y1="120" x2="110" y2="140" stroke="rgba(0,137,235,0.55)" stroke-width="1.2"/>
+                  <circle cx="110" cy="118" r="3" stroke="rgba(0,137,235,0.55)" fill="rgba(0,137,235,0.20)"/>
+                  <line x1="80" y1="305" x2="55" y2="305" stroke="rgba(0,137,235,0.55)" stroke-width="1.2"/>
+                  <line x1="100" y1="320" x2="100" y2="338" class="dmrv-eq-stroke"/>
+                  <line x1="120" y1="320" x2="120" y2="338" class="dmrv-eq-stroke"/>
+                  <text x="110" y="408" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(30,30,30,0.55)" letter-spacing="2" data-i18n="svgQuench">QUENCH</text>
+                  <text x="110" y="421" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(30,30,30,0.40)" letter-spacing="2">QT-110</text>
                 </g>
-                <!-- ABSORPTION TOWER -->
+
+                <!-- ─── HG-200 Super-Gravity Reactor (distinctive rotor visual) ─── -->
                 <g>
-                  <ellipse cx="280" cy="150" rx="38" ry="14" class="dmrv-eq-stroke" fill="url(#mon-metalSide)"/>
-                  <path d="M242,150 L242,360 M318,150 L318,360" class="dmrv-eq-stroke"/>
-                  <ellipse cx="280" cy="360" rx="38" ry="12" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.02)"/>
-                  <ellipse cx="280" cy="200" rx="38" ry="10" class="dmrv-eq-stroke-soft"/>
-                  <ellipse cx="280" cy="240" rx="38" ry="10" class="dmrv-eq-stroke-soft"/>
-                  <ellipse cx="280" cy="280" rx="38" ry="10" class="dmrv-eq-stroke-soft"/>
-                  <ellipse cx="280" cy="320" rx="38" ry="10" class="dmrv-eq-stroke-soft"/>
-                  <path d="M270,122 L290,122 L284,150 L276,150 Z" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.04)"/>
-                  <line x1="280" y1="100" x2="280" y2="122" class="dmrv-eq-stroke"/>
-                  <circle cx="280" cy="100" r="3" class="dmrv-eq-stroke" fill="rgba(0,137,235,0.50)"/>
-                  <line x1="248" y1="372" x2="244" y2="395" class="dmrv-eq-stroke"/>
-                  <line x1="312" y1="372" x2="316" y2="395" class="dmrv-eq-stroke"/>
-                  <text x="280" y="412" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(30,30,30,0.50)" letter-spacing="2" data-i18n="svgAbsorber">ABSORBER · T-200</text>
+                  <rect x="265" y="128" width="30" height="22" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.10)"/>
+                  <line x1="270" y1="133" x2="290" y2="133" class="dmrv-eq-stroke-soft"/>
+                  <line x1="270" y1="139" x2="290" y2="139" class="dmrv-eq-stroke-soft"/>
+                  <line x1="270" y1="145" x2="290" y2="145" class="dmrv-eq-stroke-soft"/>
+                  <line x1="280" y1="150" x2="280" y2="172" class="dmrv-eq-stroke"/>
+                  <rect x="220" y="170" width="120" height="80" rx="8" class="dmrv-eq-stroke" fill="url(#mon-hotJacket)"/>
+                  <circle cx="280" cy="210" r="30" class="dmrv-eq-stroke" fill="rgba(255,255,255,0.55)"/>
+                  <circle cx="280" cy="210" r="22" class="dmrv-eq-stroke-soft" fill="none"/>
+                  <path d="M280,188 Q298,196 296,212 M280,232 Q262,224 264,208 M258,210 Q266,192 282,194 M302,210 Q294,228 278,226" fill="none" stroke="var(--pwc-orange)" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
+                  <circle cx="280" cy="210" r="3" class="dmrv-eq-stroke" fill="rgba(208,74,2,0.7)"/>
+                  <line x1="280" y1="250" x2="280" y2="280" class="dmrv-eq-stroke"/>
+                  <line x1="250" y1="250" x2="248" y2="338" class="dmrv-eq-stroke"/>
+                  <line x1="310" y1="250" x2="312" y2="338" class="dmrv-eq-stroke"/>
+                  <text x="280" y="408" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(30,30,30,0.55)" letter-spacing="2" data-i18n="svgReactor">SUPER-GRAVITY</text>
+                  <text x="280" y="421" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(30,30,30,0.40)" letter-spacing="2">HG-200</text>
                 </g>
-                <!-- TOP PIPE -->
-                <path d="M280,100 L280,80 L600,80 L600,150" class="dmrv-eq-stroke"/>
-                <path d="M280,100 L280,80 L600,80 L600,150" class="dmrv-eq-flow"/>
-                <circle cx="440" cy="80" r="6" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.06)"/>
-                <line x1="440" y1="76" x2="442" y2="80" class="dmrv-eq-stroke"/>
-                <!-- REACTOR -->
+
+                <!-- ─── ST-300 Spray Tower (polishing scrubber) ─── -->
                 <g>
-                  <ellipse cx="600" cy="150" rx="42" ry="12" class="dmrv-eq-stroke" fill="url(#mon-metalSide)"/>
-                  <path d="M558,150 L558,310 L642,310 L642,150 Z" class="dmrv-eq-stroke" fill="url(#mon-hotJacket)"/>
-                  <path d="M566,180 Q600,170 634,180 Q600,200 566,210 Q600,200 634,220 Q600,240 566,250 Q600,240 634,260 Q600,280 566,290 Q600,280 634,300" class="dmrv-eq-stroke-soft"/>
-                  <line x1="558" y1="180" x2="642" y2="180" stroke="rgba(208,74,2,0.5)" stroke-width="0.8" stroke-dasharray="3 2"/>
-                  <line x1="558" y1="220" x2="642" y2="220" stroke="rgba(208,74,2,0.5)" stroke-width="0.8" stroke-dasharray="3 2"/>
-                  <line x1="558" y1="260" x2="642" y2="260" stroke="rgba(208,74,2,0.5)" stroke-width="0.8" stroke-dasharray="3 2"/>
-                  <line x1="558" y1="300" x2="642" y2="300" stroke="rgba(208,74,2,0.5)" stroke-width="0.8" stroke-dasharray="3 2"/>
-                  <ellipse cx="600" cy="310" rx="42" ry="12" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.05)"/>
-                  <rect x="650" y="200" width="22" height="60" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.03)"/>
-                  <line x1="654" y1="208" x2="668" y2="208" class="dmrv-eq-stroke-soft"/>
-                  <line x1="654" y1="216" x2="668" y2="216" class="dmrv-eq-stroke-soft"/>
-                  <line x1="654" y1="224" x2="668" y2="224" class="dmrv-eq-stroke-soft"/>
-                  <circle cx="661" cy="245" r="3" fill="rgba(208,74,2,0.8)"/>
-                  <line x1="600" y1="322" x2="595" y2="395" class="dmrv-eq-stroke"/>
-                  <line x1="600" y1="322" x2="605" y2="395" class="dmrv-eq-stroke"/>
-                  <text x="600" y="412" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(30,30,30,0.50)" letter-spacing="2" data-i18n="svgReactor">REACTOR · R-300</text>
+                  <ellipse cx="440" cy="150" rx="35" ry="10" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.05)"/>
+                  <rect x="405" y="150" width="70" height="200" class="dmrv-eq-stroke" fill="url(#mon-metalSide)"/>
+                  <ellipse cx="440" cy="350" rx="35" ry="10" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.03)"/>
+                  <line x1="420" y1="166" x2="420" y2="180" stroke="rgba(0,137,235,0.55)" stroke-width="1" stroke-dasharray="2 2"/>
+                  <line x1="440" y1="166" x2="440" y2="180" stroke="rgba(0,137,235,0.55)" stroke-width="1" stroke-dasharray="2 2"/>
+                  <line x1="460" y1="166" x2="460" y2="180" stroke="rgba(0,137,235,0.55)" stroke-width="1" stroke-dasharray="2 2"/>
+                  <ellipse cx="440" cy="220" rx="35" ry="6" class="dmrv-eq-stroke-soft" fill="none"/>
+                  <ellipse cx="440" cy="255" rx="35" ry="6" class="dmrv-eq-stroke-soft" fill="none"/>
+                  <ellipse cx="440" cy="290" rx="35" ry="6" class="dmrv-eq-stroke-soft" fill="none"/>
+                  <ellipse cx="440" cy="325" rx="35" ry="6" class="dmrv-eq-stroke-soft" fill="none"/>
+                  <line x1="440" y1="350" x2="440" y2="370" class="dmrv-eq-stroke"/>
+                  <line x1="412" y1="360" x2="410" y2="395" class="dmrv-eq-stroke"/>
+                  <line x1="468" y1="360" x2="470" y2="395" class="dmrv-eq-stroke"/>
+                  <text x="440" y="408" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(30,30,30,0.55)" letter-spacing="2" data-i18n="svgAbsorber">SPRAY</text>
+                  <text x="440" y="421" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(30,30,30,0.40)" letter-spacing="2">ST-300</text>
                 </g>
-                <!-- FEED TANK -->
+
+                <!-- ─── BL-101 Fan/Blower ─── -->
                 <g>
-                  <ellipse cx="430" cy="270" rx="32" ry="10" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.04)"/>
-                  <path d="M398,270 L398,360 L462,360 L462,270" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.02)"/>
-                  <ellipse cx="430" cy="360" rx="32" ry="10" class="dmrv-eq-stroke"/>
-                  <rect x="408" y="290" width="44" height="6" class="dmrv-eq-stroke" fill="rgba(0,137,235,0.12)"/>
-                  <rect x="408" y="290" width="30" height="6" fill="rgba(0,137,235,0.45)"/>
-                  <path d="M462,310 L520,310 L520,260 L558,260" class="dmrv-eq-stroke"/>
-                  <path d="M462,310 L520,310 L520,260 L558,260" class="dmrv-eq-flow cool"/>
-                  <line x1="402" y1="370" x2="400" y2="395" class="dmrv-eq-stroke"/>
-                  <line x1="458" y1="370" x2="460" y2="395" class="dmrv-eq-stroke"/>
-                  <text x="430" y="412" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(30,30,30,0.50)" letter-spacing="2" data-i18n="svgFeedTank">FEED TANK · V-250</text>
+                  <circle cx="540" cy="200" r="22" class="dmrv-eq-stroke" fill="url(#mon-metalSide)"/>
+                  <path d="M540,182 Q553,194 549,204 Q556,213 540,218 Q527,213 531,204 Q524,194 540,182 Z" fill="rgba(208,74,2,0.20)" stroke="var(--pwc-orange)" stroke-width="1.2" opacity="0.8"/>
+                  <circle cx="540" cy="200" r="3" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.18)"/>
+                  <line x1="528" y1="222" x2="525" y2="240" class="dmrv-eq-stroke"/>
+                  <line x1="552" y1="222" x2="555" y2="240" class="dmrv-eq-stroke"/>
+                  <text x="540" y="408" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(30,30,30,0.55)" letter-spacing="2" data-i18n="svgFan">FAN</text>
+                  <text x="540" y="421" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(30,30,30,0.40)" letter-spacing="2">BL-101</text>
                 </g>
-                <!-- PUMP / VALVE -->
+
+                <!-- ─── SK-001 Stack ─── -->
                 <g>
-                  <circle cx="200" cy="340" r="14" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.03)"/>
-                  <path d="M200,326 L200,354 M186,340 L214,340" class="dmrv-eq-stroke-soft"/>
-                  <line x1="150" y1="340" x2="186" y2="340" class="dmrv-eq-stroke"/>
-                  <line x1="214" y1="340" x2="240" y2="340" class="dmrv-eq-stroke"/>
-                  <path d="M150,340 L186,340 M214,340 L240,340" class="dmrv-eq-flow cool"/>
+                  <rect x="625" y="60" width="20" height="320" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.04)"/>
+                  <ellipse cx="635" cy="60" rx="10" ry="3" class="dmrv-eq-stroke" fill="rgba(208,74,2,0.35)"/>
+                  <line x1="625" y1="68" x2="645" y2="68" class="dmrv-eq-stroke-soft"/>
+                  <line x1="635" y1="200" x2="635" y2="70" stroke="rgba(208,74,2,0.55)" stroke-width="1" stroke-dasharray="3 3"/>
+                  <path d="M630,55 Q635,48 640,55 Q644,46 636,40" fill="none" stroke="rgba(45,45,45,0.30)" stroke-width="1" stroke-linecap="round"/>
+                  <text x="635" y="408" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(30,30,30,0.55)" letter-spacing="2" data-i18n="svgStack">STACK</text>
+                  <text x="635" y="421" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(30,30,30,0.40)" letter-spacing="2">SK-001</text>
                 </g>
-                <!-- REACTOR -> CRYSTALLIZER PIPE -->
-                <path d="M642,200 L720,200 L720,260" class="dmrv-eq-stroke"/>
-                <path d="M642,200 L720,200 L720,260" class="dmrv-eq-flow"/>
-                <!-- CRYSTALLIZER + BINS -->
+
+                <!-- ─── TK-420 NaOH Recirculation Tank ─── -->
                 <g>
-                  <path d="M696,260 L744,260 L744,310 L720,340 L696,310 Z" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.03)"/>
-                  <line x1="708" y1="270" x2="732" y2="270" class="dmrv-eq-stroke-soft"/>
-                  <line x1="708" y1="282" x2="732" y2="282" class="dmrv-eq-stroke-soft"/>
-                  <line x1="708" y1="294" x2="732" y2="294" class="dmrv-eq-stroke-soft"/>
-                  <rect x="760" y="320" width="20" height="40" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.02)"/>
-                  <line x1="760" y1="328" x2="780" y2="328" class="dmrv-eq-stroke-soft"/>
-                  <rect x="782" y="320" width="20" height="40" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.02)"/>
-                  <line x1="782" y1="328" x2="802" y2="328" class="dmrv-eq-stroke-soft"/>
-                  <rect x="804" y="320" width="20" height="40" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.02)"/>
-                  <line x1="804" y1="328" x2="824" y2="328" class="dmrv-eq-stroke-soft"/>
-                  <rect x="826" y="320" width="20" height="40" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.02)"/>
-                  <line x1="826" y1="328" x2="846" y2="328" class="dmrv-eq-stroke-soft"/>
-                  <rect x="848" y="320" width="20" height="40" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.02)"/>
-                  <line x1="848" y1="328" x2="868" y2="328" class="dmrv-eq-stroke-soft"/>
-                  <text x="820" y="412" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(30,30,30,0.50)" letter-spacing="2" data-i18n="svgCrystallizer">CRYSTALLIZER · X-400</text>
+                  <ellipse cx="180" cy="320" rx="28" ry="7" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.04)"/>
+                  <path d="M152,320 L152,380 L208,380 L208,320" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.02)"/>
+                  <ellipse cx="180" cy="380" rx="28" ry="7" class="dmrv-eq-stroke"/>
+                  <rect x="156" y="340" width="48" height="34" stroke="rgba(0,137,235,0.40)" stroke-width="0.8" fill="rgba(0,137,235,0.08)"/>
+                  <rect x="156" y="344" width="40" height="30" fill="rgba(0,137,235,0.32)"/>
+                  <text x="180" y="362" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="rgba(30,30,30,0.65)" letter-spacing="1">NaOH</text>
+                  <line x1="180" y1="313" x2="180" y2="305" class="dmrv-eq-stroke"/>
+                  <line x1="160" y1="380" x2="158" y2="395" class="dmrv-eq-stroke"/>
+                  <line x1="200" y1="380" x2="202" y2="395" class="dmrv-eq-stroke"/>
+                  <text x="180" y="408" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(30,30,30,0.55)" letter-spacing="2" data-i18n="svgFeedTank">NaOH TANK</text>
+                  <text x="180" y="421" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(30,30,30,0.40)" letter-spacing="2">TK-420</text>
                 </g>
-                <line x1="720" y1="340" x2="720" y2="395" class="dmrv-eq-stroke-soft"/>
-                <text x="280" y="92" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="rgba(30,30,30,0.55)" letter-spacing="2" data-i18n="svgCo2In">CO₂ IN</text>
-                <text x="800" y="290" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="rgba(30,30,30,0.55)" letter-spacing="2" data-i18n="svgProduct">PRODUCT</text>
-                <!-- HOTSPOTS — IoT A-01 ~ A-06 -->
+
+                <!-- ─── PF-700 Filter Press ─── -->
+                <g>
+                  <rect x="660" y="320" width="120" height="58" class="dmrv-eq-stroke" fill="url(#mon-metalSide)"/>
+                  <line x1="670" y1="324" x2="670" y2="374" class="dmrv-eq-stroke-soft"/>
+                  <line x1="680" y1="324" x2="680" y2="374" class="dmrv-eq-stroke-soft"/>
+                  <line x1="690" y1="324" x2="690" y2="374" class="dmrv-eq-stroke-soft"/>
+                  <line x1="700" y1="324" x2="700" y2="374" class="dmrv-eq-stroke-soft"/>
+                  <line x1="710" y1="324" x2="710" y2="374" class="dmrv-eq-stroke-soft"/>
+                  <line x1="720" y1="324" x2="720" y2="374" class="dmrv-eq-stroke-soft"/>
+                  <line x1="730" y1="324" x2="730" y2="374" class="dmrv-eq-stroke-soft"/>
+                  <line x1="740" y1="324" x2="740" y2="374" class="dmrv-eq-stroke-soft"/>
+                  <line x1="750" y1="324" x2="750" y2="374" class="dmrv-eq-stroke-soft"/>
+                  <line x1="760" y1="324" x2="760" y2="374" class="dmrv-eq-stroke-soft"/>
+                  <line x1="770" y1="324" x2="770" y2="374" class="dmrv-eq-stroke-soft"/>
+                  <rect x="654" y="338" width="6" height="22" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.10)"/>
+                  <path d="M810,335 L850,335 L850,378 L818,378 Z" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.10)"/>
+                  <line x1="780" y1="350" x2="810" y2="350" class="dmrv-eq-stroke"/>
+                  <line x1="675" y1="378" x2="673" y2="395" class="dmrv-eq-stroke"/>
+                  <line x1="765" y1="378" x2="767" y2="395" class="dmrv-eq-stroke"/>
+                  <text x="720" y="408" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(30,30,30,0.55)" letter-spacing="2" data-i18n="svgCrystallizer">FILTER PRESS</text>
+                  <text x="720" y="421" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(30,30,30,0.40)" letter-spacing="2">PF-700</text>
+                </g>
+
+                <!-- ─── PIPES ─── -->
+                <!-- Gas line at y=200, left-to-right through all gas equipment -->
+                <path d="M0,200 L80,200" class="dmrv-eq-stroke"/>
+                <path d="M0,200 L80,200" class="dmrv-eq-flow"/>
+                <path d="M140,200 L220,200" class="dmrv-eq-stroke"/>
+                <path d="M140,200 L220,200" class="dmrv-eq-flow"/>
+                <path d="M340,200 L405,200" class="dmrv-eq-stroke"/>
+                <path d="M340,200 L405,200" class="dmrv-eq-flow"/>
+                <path d="M475,200 L518,200" class="dmrv-eq-stroke"/>
+                <path d="M475,200 L518,200" class="dmrv-eq-flow"/>
+                <path d="M562,200 L625,200" class="dmrv-eq-stroke"/>
+                <path d="M562,200 L625,200" class="dmrv-eq-flow"/>
+
+                <!-- Flow direction chevrons on the gas pipe (▸) -->
+                <polyline points="11,196 17,200 11,204" fill="none" stroke="rgba(208,74,2,0.85)" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+                <polyline points="176,196 182,200 176,204" fill="none" stroke="rgba(208,74,2,0.85)" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+                <polyline points="368,196 374,200 368,204" fill="none" stroke="rgba(208,74,2,0.85)" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+                <polyline points="506,196 512,200 506,204" fill="none" stroke="rgba(208,74,2,0.85)" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+                <polyline points="610,196 616,200 610,204" fill="none" stroke="rgba(208,74,2,0.85)" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+
+                <!-- NaOH dosing line (TK-420 → HG-200, dashed) -->
+                <path d="M180,305 L180,240 L220,240" fill="none" stroke="rgba(44,134,70,0.65)" stroke-width="1.4" stroke-dasharray="4 3"/>
+                <circle cx="180" cy="240" r="3" class="dmrv-eq-stroke" fill="rgba(44,134,70,0.20)"/>
+
+                <!-- Slurry to filter press (HG-200 + ST-300 → PF-700, via floor) -->
+                <path d="M280,280 L280,395" fill="none" stroke="rgba(45,45,45,0.55)" stroke-width="1.2" stroke-dasharray="4 2"/>
+                <path d="M440,370 L440,395" fill="none" stroke="rgba(45,45,45,0.55)" stroke-width="1.2" stroke-dasharray="4 2"/>
+                <path d="M280,395 L720,395 L720,320" fill="none" stroke="rgba(45,45,45,0.55)" stroke-width="1.2" stroke-dasharray="4 2"/>
+                <!-- HOTSPOTS — IoT A-01 ~ A-06 (PPT-faithful positions)
+                       A-01 NDIR  → raw flue-gas inlet pipe (before QT-110)
+                       A-02 NDIR  → scrubbed-gas line between ST-300 outlet and fan
+                       A-03 FIT   → exhaust duct between fan and stack
+                       A-04 Power → HG-200 motor housing (rotating reactor power draw)
+                       A-05 Weight→ PF-700 solid output cake bin
+                       A-06 Dose  → NaOH dosing line (TK-420 → HG-200 reactor) -->
                 <g class="dmrv-hotspot" data-hot="A-01">
-                  <circle cx="260" cy="130" r="14" class="ring"/>
-                  <circle cx="260" cy="130" r="9"  class="outer"/>
-                  <circle cx="260" cy="130" r="3.5" class="inner"/>
+                  <circle cx="40" cy="200" r="14" class="ring"/>
+                  <circle cx="40" cy="200" r="9"  class="outer"/>
+                  <circle cx="40" cy="200" r="3.5" class="inner"/>
                 </g>
                 <g class="dmrv-hotspot" data-hot="A-02">
-                  <circle cx="300" cy="130" r="14" class="ring"/>
-                  <circle cx="300" cy="130" r="9"  class="outer"/>
-                  <circle cx="300" cy="130" r="3.5" class="inner"/>
+                  <circle cx="495" cy="200" r="14" class="ring"/>
+                  <circle cx="495" cy="200" r="9"  class="outer"/>
+                  <circle cx="495" cy="200" r="3.5" class="inner"/>
                 </g>
                 <g class="dmrv-hotspot" data-hot="A-03">
-                  <circle cx="200" cy="340" r="14" class="ring"/>
-                  <circle cx="200" cy="340" r="9"  class="outer"/>
-                  <circle cx="200" cy="340" r="3.5" class="inner"/>
+                  <circle cx="590" cy="200" r="14" class="ring"/>
+                  <circle cx="590" cy="200" r="9"  class="outer"/>
+                  <circle cx="590" cy="200" r="3.5" class="inner"/>
                 </g>
                 <g class="dmrv-hotspot alarm" data-hot="A-04">
-                  <circle cx="660" cy="220" r="14" class="ring"/>
-                  <circle cx="660" cy="220" r="9"  class="outer"/>
-                  <circle cx="660" cy="220" r="3.5" class="inner"/>
+                  <circle cx="280" cy="145" r="14" class="ring"/>
+                  <circle cx="280" cy="145" r="9"  class="outer"/>
+                  <circle cx="280" cy="145" r="3.5" class="inner"/>
                 </g>
                 <g class="dmrv-hotspot" data-hot="A-05">
-                  <circle cx="740" cy="290" r="14" class="ring"/>
-                  <circle cx="740" cy="290" r="9"  class="outer"/>
-                  <circle cx="740" cy="290" r="3.5" class="inner"/>
+                  <circle cx="830" cy="355" r="14" class="ring"/>
+                  <circle cx="830" cy="355" r="9"  class="outer"/>
+                  <circle cx="830" cy="355" r="3.5" class="inner"/>
                 </g>
                 <g class="dmrv-hotspot" data-hot="A-06">
-                  <circle cx="430" cy="320" r="14" class="ring"/>
-                  <circle cx="430" cy="320" r="9"  class="outer"/>
-                  <circle cx="430" cy="320" r="3.5" class="inner"/>
+                  <circle cx="180" cy="280" r="14" class="ring"/>
+                  <circle cx="180" cy="280" r="9"  class="outer"/>
+                  <circle cx="180" cy="280" r="3.5" class="inner"/>
                 </g>
               </svg>
             </div>
@@ -1228,43 +1292,43 @@
             <svg class="dmrv-leader-svg" id="dmrv-leader-svg" preserveAspectRatio="none"></svg>
 
             <!-- Floating Data Tags — IoT A-01 ~ A-06 -->
-            <div class="dmrv-dtag" data-tag="A-01" data-leader-x="260" data-leader-y="130" data-anchor="left" style="left:3%;top:8%;">
-              <div class="dt-head"><span class="dt-id">A-01 · T-200</span><span class="dt-status"></span></div>
+            <div class="dmrv-dtag" data-tag="A-01" data-leader-x="40" data-leader-y="200" data-lane="1" data-anchor="left" style="left:3%;top:23%;">
+              <div class="dt-head"><span class="dt-id">A-01 · QT-110</span><span class="dt-status"></span></div>
               <div class="dt-label" data-i18n="a01Label">Inlet CO₂ Concentration NDIR</div>
               <div class="dt-value">8,240<span class="u">ppm</span></div>
               <div class="dt-bar"><i style="width:72%"></i></div>
               <div class="dt-range"><span>6,000</span><span>12,000</span></div>
             </div>
-            <div class="dmrv-dtag" data-tag="A-02" data-leader-x="300" data-leader-y="130" data-anchor="left" style="left:3%;top:32%;">
-              <div class="dt-head"><span class="dt-id">A-02 · T-200</span><span class="dt-status"></span></div>
+            <div class="dmrv-dtag" data-tag="A-02" data-leader-x="495" data-leader-y="200" data-lane="1" data-anchor="left" style="left:47%;top:23%;">
+              <div class="dt-head"><span class="dt-id">A-02 · ST-300</span><span class="dt-status"></span></div>
               <div class="dt-label" data-i18n="a02Label">Outlet CO₂ Concentration NDIR</div>
               <div class="dt-value">412<span class="u">ppm</span></div>
               <div class="dt-bar"><i style="width:53%"></i></div>
               <div class="dt-range"><span>200</span><span>600</span></div>
             </div>
-            <div class="dmrv-dtag" data-tag="A-03" data-leader-x="200" data-leader-y="340" data-anchor="left" style="left:3%;top:62%;">
-              <div class="dt-head"><span class="dt-id">A-03 · INLET</span><span class="dt-status"></span></div>
+            <div class="dmrv-dtag" data-tag="A-03" data-leader-x="590" data-leader-y="200" data-lane="1" data-anchor="left" style="left:56%;top:23%;">
+              <div class="dt-head"><span class="dt-id">A-03 · BL-101</span><span class="dt-status"></span></div>
               <div class="dt-label" data-i18n="a03Label">Exhaust Gas Flow Meter</div>
               <div class="dt-value">1,420<span class="u">Nm³/h</span></div>
               <div class="dt-bar"><i style="width:62%"></i></div>
               <div class="dt-range"><span>800</span><span>1,800</span></div>
             </div>
-            <div class="dmrv-dtag alarm" data-tag="A-04" data-leader-x="660" data-leader-y="220" data-anchor="right" style="right:5%;top:8%;">
-              <div class="dt-head"><span class="dt-id">A-04 · R-300</span><span class="dt-status"></span></div>
+            <div class="dmrv-dtag alarm" data-tag="A-04" data-leader-x="280" data-leader-y="145" data-lane="1" data-anchor="left" style="left:26%;top:1%;">
+              <div class="dt-head"><span class="dt-id">A-04 · HG-200</span><span class="dt-status"></span></div>
               <div class="dt-label" data-i18n="a04Label">CCU Power Consumption JIS C1211</div>
               <div class="dt-value">342.5<span class="u">kWh</span></div>
               <div class="dt-bar"><i style="width:71%"></i></div>
               <div class="dt-range"><span>200</span><span>400</span></div>
             </div>
-            <div class="dmrv-dtag" data-tag="A-05" data-leader-x="740" data-leader-y="290" data-anchor="right" style="right:5%;top:32%;">
-              <div class="dt-head"><span class="dt-id">A-05 · X-400</span><span class="dt-status"></span></div>
+            <div class="dmrv-dtag" data-tag="A-05" data-leader-x="830" data-leader-y="355" data-lane="1" data-anchor="right" style="right:4%;top:55%;">
+              <div class="dt-head"><span class="dt-id">A-05 · PF-700</span><span class="dt-status"></span></div>
               <div class="dt-label" data-i18n="a05Label">NaHCO₃ Output JIS B7611</div>
               <div class="dt-value">2.84<span class="u">t/batch</span></div>
               <div class="dt-bar"><i style="width:56%"></i></div>
               <div class="dt-range"><span>2.0</span><span>3.5</span></div>
             </div>
-            <div class="dmrv-dtag" data-tag="A-06" data-leader-x="430" data-leader-y="320" data-anchor="right" style="right:5%;top:62%;">
-              <div class="dt-head"><span class="dt-id">A-06 · V-250</span><span class="dt-status"></span></div>
+            <div class="dmrv-dtag" data-tag="A-06" data-leader-x="180" data-leader-y="280" data-lane="1" data-anchor="left" style="left:16%;top:40%;">
+              <div class="dt-head"><span class="dt-id">A-06 · TK-420</span><span class="dt-status"></span></div>
               <div class="dt-label" data-i18n="a06Label">NaOH Usage</div>
               <div class="dt-value">18.2<span class="u">L/h</span></div>
               <div class="dt-bar"><i style="width:41%"></i></div>
@@ -1275,8 +1339,8 @@
             <div class="dmrv-hero-overlay">
               <div class="dmrv-hero-title">
                 <span class="h hero-status">
-                  <span class="dmrv-status-pulse warn"></span>
-                  <span data-i18n="monStatus">Operating · Caution</span>
+                  <span class="dmrv-status-pulse"></span>
+                  <span data-i18n="monStatus">Operating · Live</span>
                 </span>
               </div>
             </div>
@@ -1285,11 +1349,13 @@
             <div class="dmrv-hero-legend">
               <div class="item"><span class="swatch" style="background:#D04A02"></span><span data-i18n="legendCo2">CO₂ Flow</span></div>
               <div class="item"><span class="swatch" style="background:#0089EB"></span><span data-i18n="legendCooling">Cooling Circuit</span></div>
+              <div class="item"><span class="swatch" style="background:repeating-linear-gradient(90deg,rgba(44,134,70,0.85) 0 5px,transparent 5px 8px);"></span><span data-i18n="legendNaoh">NaOH Dosing</span></div>
+              <div class="item"><span class="swatch" style="background:repeating-linear-gradient(90deg,rgba(45,45,45,0.70) 0 5px,transparent 5px 8px);"></span><span data-i18n="legendSlurry">Slurry</span></div>
               <div class="item"><span class="swatch" style="background:rgba(45,45,45,0.45)"></span><span data-i18n="legendStructure">Structure</span></div>
             </div>
 
             <!-- Axes -->
-            <div class="dmrv-hero-axes" data-i18n="monAxes">+X 12.4m · +Z 4.8m · 4 active sensors</div>
+            <div class="dmrv-hero-axes" data-i18n="monAxes">6 active sensors</div>
           </div><!-- /dmrv-hero -->
         </div><!-- /mon-wrap -->
       </div>
@@ -1301,19 +1367,48 @@
         function leaderPath(tag, hero){
           var w = hero.clientWidth, h = hero.clientHeight;
           if(!w) return "";
+          // Map SVG-coord dot positions to hero-pixel coords using the equipment
+          // SVG's actual rect — the canvas is now narrower than the hero (CSS
+          // margins reserve space for the sensor cards on each side), so we can't
+          // assume the SVG fills the hero anymore.
+          var canvasSvg = hero.querySelector(".dmrv-hero-canvas svg");
+          var heroRect = hero.getBoundingClientRect();
+          var svgRect = canvasSvg ? canvasSvg.getBoundingClientRect() : heroRect;
+          var svgX = svgRect.left - heroRect.left;
+          var svgY = svgRect.top - heroRect.top;
+          // preserveAspectRatio="xMidYMid meet" → fit-to-smaller-dimension, centered
+          var renderScale = Math.min(svgRect.width / SVG_W, svgRect.height / SVG_H);
+          var offsetX = svgX + (svgRect.width  - SVG_W * renderScale) / 2;
+          var offsetY = svgY + (svgRect.height - SVG_H * renderScale) / 2;
           var lx = parseFloat(tag.dataset.leaderX);
           var ly = parseFloat(tag.dataset.leaderY);
-          var tx = lx * (w / SVG_W);
-          var ty = ly * (h / SVG_H);
+          var tx = lx * renderScale + offsetX;
+          var ty = ly * renderScale + offsetY;
           var rect = tag.getBoundingClientRect();
-          var heroRect = hero.getBoundingClientRect();
+          var cardLeft = rect.left - heroRect.left;
+          var cardRight = cardLeft + rect.width;
+          var cardTop = rect.top - heroRect.top;
+          var cardBottom = cardTop + rect.height;
+          // If the target sits inside the card's horizontal range, do a straight
+          // vertical drop from the closest card edge — no horizontal needed.
+          if (tx >= cardLeft - 4 && tx <= cardRight + 4) {
+            var exitY = ty < cardTop ? cardTop : cardBottom;
+            return "M"+tx+","+exitY+" L"+tx+","+ty;
+          }
           var anchorSide = tag.dataset.anchor;
           var ax, ay;
-          ay = rect.top - heroRect.top + rect.height / 2;
-          if(anchorSide === "left") ax = rect.left - heroRect.left + rect.width;
-          else                       ax = rect.left - heroRect.left;
+          ay = cardTop + rect.height / 2;
+          if(anchorSide === "left") ax = cardRight;
+          else                       ax = cardLeft;
+          // Approach lane — keeps leaders that target the same y-line (several
+          // sensors on the gas pipe) from piling up on one horizontal. The final
+          // segment becomes a short vertical "stinger" dropping onto the dot.
+          var lane = parseFloat(tag.dataset.lane);
+          if(isNaN(lane)) lane = 1;
+          var laneGap = 18 * lane;
+          var approachY = ay > ty ? ty + laneGap : ty - laneGap;
           var midX = (ax + tx) / 2;
-          return "M"+ax+","+ay+" L"+midX+","+ay+" L"+midX+","+ty+" L"+tx+","+ty;
+          return "M"+ax+","+ay+" L"+midX+","+ay+" L"+midX+","+approachY+" L"+tx+","+approachY+" L"+tx+","+ty;
         }
         function rebuildLeaders(){
           var hero = document.getElementById("dmrv-hero");
@@ -1349,11 +1444,25 @@
         function init(){
           var hero = document.getElementById("dmrv-hero");
           if(!hero) return;
+          // Reveal card + leader only while the dot or card is being hovered (or tapped).
+          // 200ms grace lets the cursor travel from dot → card without the card vanishing.
+          var clearTimer = null;
+          function scheduleClear(){
+            if(clearTimer) clearTimeout(clearTimer);
+            clearTimer = setTimeout(function(){ setActive(null); clearTimer = null; }, 200);
+          }
+          function cancelClear(){
+            if(clearTimer){ clearTimeout(clearTimer); clearTimer = null; }
+          }
           $mon(".dmrv-hotspot", hero).forEach(function(g){
-            g.addEventListener("click", function(){ setActive(g.dataset.hot); });
+            g.addEventListener("mouseenter", function(){ cancelClear(); setActive(g.dataset.hot); });
+            g.addEventListener("mouseleave", scheduleClear);
+            g.addEventListener("click",      function(){ cancelClear(); setActive(g.dataset.hot); });
           });
           $mon(".dmrv-dtag", hero).forEach(function(t){
-            t.addEventListener("click", function(){ setActive(t.dataset.tag); });
+            t.addEventListener("mouseenter", function(){ cancelClear(); setActive(t.dataset.tag); });
+            t.addEventListener("mouseleave", scheduleClear);
+            t.addEventListener("click",      function(){ cancelClear(); setActive(t.dataset.tag); });
           });
           rebuildLeaders();
           window.addEventListener("resize", rebuildLeaders);

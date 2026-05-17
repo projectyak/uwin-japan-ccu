@@ -8,7 +8,7 @@ Marketing site for UWin·Japan, a CCU (Carbon Capture & Utilization) compliance 
 
 - Visitor registration gate as site root (QR-friendly entry)
 - Hero with live dMRV dashboard preview
-- Hardware: CCU equipment flow diagram & real-time IoT monitoring
+- Hardware: PPT-faithful CCU process diagram (quench → super-gravity reactor → spray → fan → stack, plus NaOH tank and filter press) with 6 hover-driven IoT sensor cards
 - Software: Platform capabilities (ISO 14064-3 / ISO 14067 / METI FY26)
 - Solution: Compliance pipeline walkthrough + How It Works
 - Trilingual support (EN / 中文 / 日本語)
