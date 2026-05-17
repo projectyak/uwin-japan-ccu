@@ -1,3 +1,4 @@
 .netlify/
 .claude/
 deploy.zip
+.DS_store
