@@ -599,7 +599,7 @@
               <!-- Process inlet / outlet labels -->
               <text x="20" y="200" text-anchor="start" font-family="JetBrains Mono, monospace" font-size="10" fill="rgba(30,30,30,0.55)" letter-spacing="2">CO₂ IN</text>
               <text x="665" y="75" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(30,30,30,0.50)" letter-spacing="2">↑ CLEAN GAS</text>
-              <text x="860" y="302" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="rgba(30,30,30,0.55)" letter-spacing="2">NaHCO₃</text>
+              <text x="860" y="292" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="rgba(30,30,30,0.55)" letter-spacing="2">NaHCO₃</text>
 
               <!-- ────────── QT-110 Quench Tower (cx=120, h=150) ────────── -->
               <g>
@@ -722,9 +722,9 @@
                 <!-- slurry inlet on left side (mid-body) -->
                 <rect x="654" y="258" width="6" height="20" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.10)"/>
                 <!-- cake discharge chute from press bottom-right down to the collection bin -->
-                <line x1="780" y1="280" x2="810" y2="310" class="dmrv-eq-stroke"/>
-                <!-- NaHCO₃ collection bin (sits on the floor) -->
-                <path d="M810,310 L850,310 L850,350 L818,350 Z" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.10)"/>
+                <line x1="780" y1="280" x2="810" y2="300" class="dmrv-eq-stroke"/>
+                <!-- NaHCO₃ collection bin (sits ON the floor at y=340) -->
+                <path d="M810,300 L850,300 L850,340 L818,340 Z" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.10)"/>
                 <!-- legs / stand (match the other vessels' splay angle) -->
                 <line x1="665" y1="290" x2="663" y2="338" class="dmrv-eq-stroke"/>
                 <line x1="775" y1="290" x2="777" y2="338" class="dmrv-eq-stroke"/>
@@ -787,9 +787,9 @@
               </g>
               <!-- A-05 Weight on PF-700 output -->
               <g class="dmrv-hotspot" data-hot="A-05">
-                <circle cx="860" cy="330" r="14" class="ring"/>
-                <circle cx="860" cy="330" r="9" class="outer"/>
-                <circle cx="860" cy="330" r="3.5" class="inner"/>
+                <circle cx="860" cy="320" r="14" class="ring"/>
+                <circle cx="860" cy="320" r="9" class="outer"/>
+                <circle cx="860" cy="320" r="3.5" class="inner"/>
               </g>
               <!-- A-06 NaOH dosing on the feed line -->
               <g class="dmrv-hotspot" data-hot="A-06">
@@ -831,7 +831,7 @@
             <div class="dt-bar"><i style="width:71%"></i></div>
             <div class="dt-range"><span>200</span><span>400</span></div>
           </div>
-          <div class="dmrv-dtag" data-tag="A-05" data-leader-x="860" data-leader-y="330" data-lane="1" data-anchor="right" style="right:3%;top:54%;">
+          <div class="dmrv-dtag" data-tag="A-05" data-leader-x="860" data-leader-y="320" data-lane="1" data-anchor="right" style="right:3%;top:54%;">
             <div class="dt-head"><span class="dt-id">A-05 · PF-700</span><span class="dt-status"></span></div>
             <div class="dt-label">NaHCO₃ output · JIS B7611</div>
             <div class="dt-value">2.84<span class="u">t/batch</span></div>
