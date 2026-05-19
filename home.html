@@ -1064,7 +1064,7 @@
           <p class="lead-form-sub" data-i18n="v2LfSub">UWin·Japan will reach out within 2 business days. Your information stays confidential.</p>
         </div>
 
-        <form class="lead-form" id="lead-form" novalidate>
+        <form class="lead-form" id="lead-form">
           <input type="hidden" name="form_type" value="contact">
 
           <div class="lf-row">
@@ -1256,7 +1256,7 @@
   <!-- ── Lead form: card buttons scroll + prefill; POST to GAS ── -->
   <script>
     (function () {
-      const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxuLFurjzcXsh1SxnB0fJoy3kfXu8MVzHfYb723sUMm0V6t_r3F167Le5OYiGOsNNF7cg/exec';
+      const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzlnnCVvpzR1w2MhDYojxUP_AWNntzbtqaMqs-3mOsEyC4UrR73zmpL-pCQL0BR646Dcg/exec';
 
       // Any in-page anchor that points to #next should focus the first form field after the smooth-scroll
       function focusFirstFormField() {
@@ -1280,28 +1280,11 @@
           submitBtn.disabled = true;
           submitSpan.textContent = "Sending…";
 
-          // Pack auxiliary fields into the message field that GAS will store
+          // Send raw fields; GAS stores each one in its own column.
+          // `message_freetext` is renamed to `message` so the backend can keep
+          // a single "Message" column name across form variants.
           const fd = new FormData(form);
-          const topics = fd.getAll("topics").join(", ") || "(none)";
-          const formats = fd.getAll("formats").join(", ") || "(not specified)";
-          const phone = fd.get("phone") || "(not provided)";
-          const jobTitle = fd.get("job_title") || "(not provided)";
-          const freetext = fd.get("message_freetext") || "";
-
-          const packedMessage =
-            "[Preferred response format] " + formats + "\n" +
-            "[Topics of interest] " + topics + "\n" +
-            "[Phone] " + phone + "\n" +
-            "[Job Title] " + jobTitle + "\n" +
-            "[Source] UWin·Japan website (home-v2)\n" +
-            "\n--- Additional message ---\n" +
-            (freetext || "(no additional message)");
-
-          fd.set("message", packedMessage);
-          fd.delete("topics");
-          fd.delete("formats");
-          fd.delete("phone");
-          fd.delete("job_title");
+          fd.set("message", fd.get("message_freetext") || "");
           fd.delete("message_freetext");
 
           fetch(APPS_SCRIPT_URL, {

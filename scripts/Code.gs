@@ -20,6 +20,10 @@
  * Routing: doPost reads `form_type` to pick a handler.
  *   - missing or "contact"       → handleContact   (writes to "Contact"  sheet)
  *   - "visitor_gate"             → handleVisitorGate (writes to "Visitors" sheet)
+ *
+ * Contact sheet columns:
+ *   Timestamp | Name | Company | Email | Phone | Job Title | Topics | Formats | Message
+ *   (Topics and Formats are multi-select checkboxes joined with ", ")
  */
 
 var RECIPIENT_EMAIL = "project@yaktw.com";
@@ -32,7 +36,7 @@ function doPost(e) {
     if (formType === "visitor_gate") {
       return handleVisitorGate(data);
     }
-    return handleContact(data);
+    return handleContact(data, e.parameters || {});
 
   } catch (error) {
     return ContentService
@@ -41,16 +45,26 @@ function doPost(e) {
   }
 }
 
-/* ── Contact form (existing behaviour) ────────────────────────────── */
-function handleContact(data) {
+/* ── Contact form ─────────────────────────────────────────────────── */
+function handleContact(data, multi) {
+  // Multi-select fields (topics, formats) arrive as repeated form params.
+  // e.parameter only keeps the last value, so we read the full arrays
+  // from e.parameters (note the trailing 's') passed in as `multi`.
+  var topics  = joinMulti_(multi, "topics");
+  var formats = joinMulti_(multi, "formats");
+
   var sheet = getOrCreateSheet_("Contact",
-    ["Timestamp", "Name", "Email", "Company", "Message"]);
+    ["Timestamp", "Name", "Company", "Email", "Phone", "Job Title", "Topics", "Formats", "Message"]);
   sheet.appendRow([
     new Date(),
-    data.name || "",
-    data.email || "",
-    data.company || "",
-    data.message || ""
+    data.name      || "",
+    data.company   || "",
+    data.email     || "",
+    data.phone     || "",
+    data.job_title || "",
+    topics,
+    formats,
+    data.message   || ""
   ]);
 
   var subject = "【CCU Platform】收到新的預約諮詢 - " + (data.company || "");
@@ -58,10 +72,14 @@ function handleContact(data) {
     '<div style="font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;max-width:600px;color:#333;">' +
       '<h2 style="color:#043d30;font-size:24px;margin-bottom:24px;">New contact form submission</h2>' +
       '<table style="width:100%;border-collapse:collapse;">' +
-        row_("Name",    data.name) +
-        row_("Email",   data.email) +
-        row_("Company", data.company) +
-        row_("Message", data.message) +
+        row_("Name",      data.name) +
+        row_("Company",   data.company) +
+        row_("Email",     data.email) +
+        row_("Phone",     data.phone) +
+        row_("Job Title", data.job_title) +
+        row_("Topics",    topics) +
+        row_("Formats",   formats) +
+        row_("Message",   data.message) +
       '</table>' +
       '<p style="color:#999;font-size:12px;margin-top:30px;">Sent from CCU Expo contact form</p>' +
     '</div>';
@@ -111,6 +129,12 @@ function getOrCreateSheet_(name, headers) {
     sheet.setFrozenRows(1);
   }
   return sheet;
+}
+
+function joinMulti_(multi, key) {
+  var arr = multi && multi[key];
+  if (!arr || !arr.length) return "";
+  return arr.join(", ");
 }
 
 function row_(label, value) {
