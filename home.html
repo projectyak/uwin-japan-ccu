@@ -599,7 +599,7 @@
               <!-- Process inlet / outlet labels -->
               <text x="20" y="200" text-anchor="start" font-family="JetBrains Mono, monospace" font-size="10" fill="rgba(30,30,30,0.55)" letter-spacing="2">CO₂ IN</text>
               <text x="665" y="75" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(30,30,30,0.50)" letter-spacing="2">↑ CLEAN GAS</text>
-              <text x="860" y="325" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="rgba(30,30,30,0.55)" letter-spacing="2">NaHCO₃</text>
+              <text x="860" y="302" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="rgba(30,30,30,0.55)" letter-spacing="2">NaHCO₃</text>
 
               <!-- ────────── QT-110 Quench Tower (cx=120, h=150) ────────── -->
               <g>
@@ -704,26 +704,30 @@
                 <text x="200" y="420" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(30,30,30,0.40)" letter-spacing="2">TK-420</text>
               </g>
 
-              <!-- ────────── PF-700 Filter Press (cx=750, NaHCO₃ bin separated with conveyor; far enough right of STACK label to clear it) ────────── -->
+              <!-- ────────── PF-700 Filter Press (raised onto a stand like the other vessels, cx=750) ────────── -->
               <g transform="translate(30,0)">
-                <rect x="660" y="320" width="120" height="50" class="dmrv-eq-stroke" fill="url(#mon-metalSide)"/>
+                <rect x="660" y="240" width="120" height="50" class="dmrv-eq-stroke" fill="url(#mon-metalSide)"/>
                 <!-- filter plates -->
-                <line x1="668" y1="324" x2="668" y2="366" class="dmrv-eq-stroke-soft"/>
-                <line x1="678" y1="324" x2="678" y2="366" class="dmrv-eq-stroke-soft"/>
-                <line x1="688" y1="324" x2="688" y2="366" class="dmrv-eq-stroke-soft"/>
-                <line x1="698" y1="324" x2="698" y2="366" class="dmrv-eq-stroke-soft"/>
-                <line x1="708" y1="324" x2="708" y2="366" class="dmrv-eq-stroke-soft"/>
-                <line x1="718" y1="324" x2="718" y2="366" class="dmrv-eq-stroke-soft"/>
-                <line x1="728" y1="324" x2="728" y2="366" class="dmrv-eq-stroke-soft"/>
-                <line x1="738" y1="324" x2="738" y2="366" class="dmrv-eq-stroke-soft"/>
-                <line x1="748" y1="324" x2="748" y2="366" class="dmrv-eq-stroke-soft"/>
-                <line x1="758" y1="324" x2="758" y2="366" class="dmrv-eq-stroke-soft"/>
-                <line x1="768" y1="324" x2="768" y2="366" class="dmrv-eq-stroke-soft"/>
-                <!-- inlet on left -->
-                <rect x="654" y="335" width="6" height="20" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.10)"/>
-                <!-- output collection box on right, separated with a conveyor connector -->
-                <path d="M810,335 L850,335 L850,370 L818,370 Z" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.10)"/>
-                <line x1="780" y1="350" x2="810" y2="350" class="dmrv-eq-stroke"/>
+                <line x1="668" y1="244" x2="668" y2="286" class="dmrv-eq-stroke-soft"/>
+                <line x1="678" y1="244" x2="678" y2="286" class="dmrv-eq-stroke-soft"/>
+                <line x1="688" y1="244" x2="688" y2="286" class="dmrv-eq-stroke-soft"/>
+                <line x1="698" y1="244" x2="698" y2="286" class="dmrv-eq-stroke-soft"/>
+                <line x1="708" y1="244" x2="708" y2="286" class="dmrv-eq-stroke-soft"/>
+                <line x1="718" y1="244" x2="718" y2="286" class="dmrv-eq-stroke-soft"/>
+                <line x1="728" y1="244" x2="728" y2="286" class="dmrv-eq-stroke-soft"/>
+                <line x1="738" y1="244" x2="738" y2="286" class="dmrv-eq-stroke-soft"/>
+                <line x1="748" y1="244" x2="748" y2="286" class="dmrv-eq-stroke-soft"/>
+                <line x1="758" y1="244" x2="758" y2="286" class="dmrv-eq-stroke-soft"/>
+                <line x1="768" y1="244" x2="768" y2="286" class="dmrv-eq-stroke-soft"/>
+                <!-- slurry inlet on left side (mid-body) -->
+                <rect x="654" y="258" width="6" height="20" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.10)"/>
+                <!-- cake discharge chute from press bottom-right down to the collection bin -->
+                <line x1="780" y1="280" x2="810" y2="310" class="dmrv-eq-stroke"/>
+                <!-- NaHCO₃ collection bin (sits on the floor) -->
+                <path d="M810,310 L850,310 L850,350 L818,350 Z" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.10)"/>
+                <!-- legs / stand (match the other vessels' splay angle) -->
+                <line x1="665" y1="290" x2="663" y2="338" class="dmrv-eq-stroke"/>
+                <line x1="775" y1="290" x2="777" y2="338" class="dmrv-eq-stroke"/>
                 <text x="720" y="405" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="rgba(30,30,30,0.55)" letter-spacing="2">FILTER PRESS</text>
                 <text x="720" y="420" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(30,30,30,0.40)" letter-spacing="2">PF-700</text>
               </g>
@@ -754,7 +758,7 @@
               <!-- ────────── SLURRY LINE (HG-200 + ST-300 bottom → PF-700, gray dashed) ────────── -->
               <path d="M305,290 L305,355" fill="none" stroke="rgba(45,45,45,0.55)" stroke-width="1.2" stroke-dasharray="4 2"/>
               <path d="M470,290 L470,355" fill="none" stroke="rgba(45,45,45,0.55)" stroke-width="1.2" stroke-dasharray="4 2"/>
-              <path d="M305,355 L690,355 L690,345" fill="none" stroke="rgba(45,45,45,0.55)" stroke-width="1.2" stroke-dasharray="4 2"/>
+              <path d="M305,355 L684,355 L684,268" fill="none" stroke="rgba(45,45,45,0.55)" stroke-width="1.2" stroke-dasharray="4 2"/>
 
               <!-- ────────── HOTSPOTS (6 sensors, repositioned to new geometry) ────────── -->
               <!-- A-01 NDIR inlet (gas pipe before QT-110) -->
@@ -783,9 +787,9 @@
               </g>
               <!-- A-05 Weight on PF-700 output -->
               <g class="dmrv-hotspot" data-hot="A-05">
-                <circle cx="860" cy="355" r="14" class="ring"/>
-                <circle cx="860" cy="355" r="9" class="outer"/>
-                <circle cx="860" cy="355" r="3.5" class="inner"/>
+                <circle cx="860" cy="330" r="14" class="ring"/>
+                <circle cx="860" cy="330" r="9" class="outer"/>
+                <circle cx="860" cy="330" r="3.5" class="inner"/>
               </g>
               <!-- A-06 NaOH dosing on the feed line -->
               <g class="dmrv-hotspot" data-hot="A-06">
@@ -827,7 +831,7 @@
             <div class="dt-bar"><i style="width:71%"></i></div>
             <div class="dt-range"><span>200</span><span>400</span></div>
           </div>
-          <div class="dmrv-dtag" data-tag="A-05" data-leader-x="860" data-leader-y="355" data-lane="1" data-anchor="right" style="right:3%;top:54%;">
+          <div class="dmrv-dtag" data-tag="A-05" data-leader-x="860" data-leader-y="330" data-lane="1" data-anchor="right" style="right:3%;top:54%;">
             <div class="dt-head"><span class="dt-id">A-05 · PF-700</span><span class="dt-status"></span></div>
             <div class="dt-label">NaHCO₃ output · JIS B7611</div>
             <div class="dt-value">2.84<span class="u">t/batch</span></div>
