@@ -1018,7 +1018,7 @@
           /* Hide leader lines and axes — not useful at small size */
           #mon-wrap .dmrv-leader-svg,
           #mon-wrap .dmrv-hero-axes { display: none !important; }
-          /* Sensor cards: 2-column grid, rows 3+ */
+          /* Sensor cards: always visible on touch (no hover), 2-column grid rows 3+ */
           #mon-wrap .dmrv-dtag {
             position: static !important;
             left: auto !important; right: auto !important;
@@ -1026,6 +1026,12 @@
             min-width: 0 !important;
             order: 3;
             font-size: 11px;
+            opacity: 1 !important;
+            pointer-events: auto !important;
+            transform: none !important;
+          }
+          #mon-wrap .dmrv-dtag.alarm {
+            order: 3; /* keep grid flow, but visually highlighted by border/color */
           }
           #mon-wrap .dmrv-dtag .dt-value { font-size: 15px; }
           /* Legend: last row, full width */
